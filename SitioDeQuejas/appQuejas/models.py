@@ -12,6 +12,7 @@ class Usuario(models.Model):
 class Queja(models.Model):
 	titulo = models.CharField(max_length=150)
 	categoria = models.ForeignKey('Categoria',on_delete=models.CASCADE)
+	fechaCreacion = models.DateField(auto_now=True)
 	imagen = models.ImageField(upload_to='imgs/')
 	usuario = models.ForeignKey('Usuario',on_delete=models.CASCADE)
 	comentarios = models.ManyToManyField('Comentario')
@@ -22,3 +23,4 @@ class Categoria(models.Model):
 class Comentario(models.Model):
 	contenido = models.CharField(max_length=500)
 	usuario = models.ForeignKey('Usuario',on_delete=models.CASCADE)
+	fechaCreacion = models.DateField(auto_now=True)
