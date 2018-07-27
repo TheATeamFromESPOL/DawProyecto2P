@@ -1,3 +1,5 @@
 from django.shortcuts import render
+from .models import *
 
-# Create your views here.
+def serviciosListar(request):
+	return render(request,'servicios/index.html',{'personas':personas})
