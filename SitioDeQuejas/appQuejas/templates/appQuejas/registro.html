@@ -1,0 +1,59 @@
+{% extends 'appQuejas/plantilla.html' %}
+{%block content%}
+	<div class="container">
+		<br>
+		<h3>¡Regístrate!</h3>
+		<h5>De esa forma podras interactuar con los demas usuarios y colocar tus propias quejas.</h5>
+		<form id="formularioRegistro">
+			<div class="form-group">
+				<label for="nombreUsuario">Usuario:</label><br>
+				<input class="form-control" type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Nombre de usuario a usar"><br>
+			</div>
+			<div class="form-group">
+				<label for="correoUsuario">Correo:</label><br>
+				<input class="form-control" type="text" name="correoUsuario" id="correoUsuario" placeholder="Correo a utilizar"><br>
+			</div>
+			<div class="form-group">
+				<label for="numeroCelular">Celular:</label>
+				<span id="consultaDeCelular">(?)</span>
+				<span id="porqueCelular" class="esconder">Para que las organizaciones pertinentes se puedan poner en contacto contigo.</span><br>
+				<script src="js/jquery.min.js"></script>
+				<script src="js/registro.js"></script>
+				<input class="form-control" type="text" name="numeroCelular" id="numeroCelular" placeholder="Numero de celular">
+			</div>	
+			<!-- El símbolo (?) es para que el usuario pase el mouse sobre él y se muestre un mensaje de por qué se necesita esa información -->
+			<br>
+			
+			<div class="form-group">
+				<label>Provincia: </label>
+				<select class="form-control" name="provincias" id="provincias">
+					<option value="Esmeraldas">Esmeraldas</option>
+					<option value="Guayas">Guayas</option>
+					<option value="Pichincha">Pichincha</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Ciudad: </label>
+				<select class="form-control" name="ciudades" id="ciudades">
+					<option value="Esmeraldas">Esmeraldas</option>
+					<option value="Guayaquil">Guayaquil</option>
+					<option value="Quito">Quito</option>	
+				</select>
+			</div>
+			<br>
+			<div class="form-group">
+				<label for="password">Contraseña:</label><br>
+				<input class="form-control" type="text" name="password" id="password" placeholder="Contraseña a utilizar"><br>	
+			</div>
+			<div class="form-group">
+				<label for="passwordRepeat">Confirmar contraseña:</label><br>
+				<input class="form-control" type="text" name="passwordRepeat" id="passwordRepeat" placeholder="Confirme su contraseña"><br>
+			</div>
+			<div class="d-flex justify-content-center">
+				<button type="button" class=" colorBtn btn btn-default col-5">REGISTRAR</button>
+			</div>
+			<br><br><br>
+		</form>
+	</div>
+{%endblock%}
+		
