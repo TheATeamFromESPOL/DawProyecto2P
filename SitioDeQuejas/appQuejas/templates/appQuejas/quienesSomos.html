@@ -1,4 +1,13 @@
 {% extends 'appQuejas/plantilla.html' %}
 {%block content%}
-	
+			<nav >
+				<ul class="row">
+					<li class="col"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+					<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+					<li class="col activo"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+					<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+					</ul>
+			</nav>
+		</header>
+		<div class="content">
 {%endblock%}

@@ -1,25 +1,37 @@
 {% extends 'appQuejas/plantilla.html' %}
 {%block content%}
-<section class="p-4">
-	<div class="container">
-		<h3>¡Envíanos tus sugerencias!</h3>
-		<h5><br>Puedes enviarnos un correo a nuestro mail: <a href="mailto:larizaga@espol.edu.ec?Subject=Sugerencia%20en%20Portal%20de%20Quejas" target="_top">larizaga@espol.edu.ec</a><br><br>O puedes escribirnos por aquí:</h5>
-		<form id="formularioContactenos">
-			<div class="form-group">
-				<label for="asuntoContactenos">Asunto:</label><br>
-				<input class="form-control" type="text" name="asuntoContactenos" id="asuntoContactenos" placeholder="Asunto del contacto"><br>
-			</div>
-			<div class="form-group">
-				<label for="contenidoContactenos">Contenido:</label><br>
-				<textarea class="form-control" name=contenidoContactenos id=contenidoContactenos placeholder="¿Por qué nos contactas?" rows=5></textarea><br>
-			</div>
-			<div class="d-flex justify-content-center">
-				<button type="button" id="botonEnviar" class="colorBtn btn btn-default col-12">ENVIAR</button>
-			</div>
-			<script src="js/jquery.min.js"></script>
-			<script src="js/contactenos.js"></script>
-			<script src="js/menu.js"></script>
-		</form>
-	</div>
-</section>
+			<nav >
+				<ul class="row">
+					<li class="col"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+					<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+					<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+					<li class="col activo"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+					</ul>
+			</nav>
+
+		</header>
+		
+		<div class="content">
+			<section class="p-4">
+				<div class="container">
+					<h3>¡Envíanos tus sugerencias!</h3>
+					<h5><br>Puedes enviarnos un correo a nuestro mail: <a href="mailto:larizaga@espol.edu.ec?Subject=Sugerencia%20en%20Portal%20de%20Quejas" target="_top">larizaga@espol.edu.ec</a><br><br>O puedes escribirnos por aquí:</h5>
+					<form id="formularioContactenos">
+						<div class="form-group">
+							<label for="asuntoContactenos">Asunto:</label><br>
+							<input class="form-control" type="text" name="asuntoContactenos" id="asuntoContactenos" placeholder="Asunto del contacto"><br>
+						</div>
+						<div class="form-group">
+							<label for="contenidoContactenos">Contenido:</label><br>
+							<textarea class="form-control" name=contenidoContactenos id=contenidoContactenos placeholder="¿Por qué nos contactas?" rows=5></textarea><br>
+						</div>
+						<div class="d-flex justify-content-center">
+							<button type="button" id="botonEnviar" class="colorBtn btn btn-default col-12">ENVIAR</button>
+						</div>
+						<script src="js/jquery.min.js"></script>
+						<script src="js/contactenos.js"></script>
+						<script src="js/menu.js"></script>
+					</form>
+				</div>
+			</section>
 {%endblock%}
