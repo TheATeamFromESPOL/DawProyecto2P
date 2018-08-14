@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+class Usertype(models.Model):
+	tipoUsuario = models.CharField(max_length=20)
+
 class Usuario(models.Model):
 	nombreDeUsuario = models.CharField(max_length=80,unique=True)
 	contrasena = models.CharField(max_length=50)
@@ -8,6 +11,7 @@ class Usuario(models.Model):
 	apellidoPersona = models.CharField(max_length=255)
 	correo = models.CharField(max_length=255,unique=True)
 	numeroContacto = models.CharField(max_length=50)
+	tipo = models.ForeignKey('Usertype',on_delete=models.CASCADE)
 
 class Queja(models.Model):
 	titulo = models.CharField(max_length=300)
