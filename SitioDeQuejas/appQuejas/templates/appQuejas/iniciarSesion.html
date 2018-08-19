@@ -7,7 +7,8 @@
 		<br><br> 
 		<h3>Iniciar sesión</h3>
 		<h5>Inicia sesión para publicar tus quejas, e interactuar con las de otros.</h5>
-		<form id="formularioInicioSesión" class="col-12" method="POST">
+		<form id="formularioInicioSesión" class="col-12" method="POST" action="{% url 'iniciarSesion' %}">
+			{% csrf_token %}
 			<div class="form-group">
 				<label for="nombreUsuario">Usuario:</label><br>
 				<input class="form-control" type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Nombre de usuario"><br>
@@ -18,10 +19,11 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="button" class=" colorBtn btn btn-default col-12">REGISTRAR</button>
+				<button type="submit">Login</button>	
 			</div>
 			<br><br>
 		</form>
+		{{mensaje}}
 	</div>
 {%endblock%}
 {% block scripts %}
