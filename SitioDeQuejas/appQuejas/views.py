@@ -12,7 +12,9 @@ from rest_framework import permissions
 
 
 def cargarNoticias(request):
-	return render(request,'appQuejas/noticiasIndex.html',{})
+	queryset=Queja.objects.all()
+	queryset=queryset[:6]
+	return render(request,'appQuejas/noticiasIndex.html',{'quejas':queryset})
 
 def quienesSomos(request):
 	#Esto es lo mismo siempre
@@ -33,9 +35,10 @@ def contactenos(request):
 	return render(request, 'appQuejas/contactenos.html',{})
 
 def noticiaSeleccionada(request,pk):
-    data = Queja.objects.get(pk)
+	noticia = Queja.objects.get(pk=pk)
+	serializer = QuejaSerializer(noticia, many=False)
+	return render(request, 'appQuejas/noticia.html',{})
 
-    return render(request, 'appQuejas/noticia.html',{})
 
 @permission_classes((permissions.AllowAny,))
 class cargarNoti(APIView):
@@ -44,3 +47,9 @@ class cargarNoti(APIView):
 		queryset=queryset[:6]
 		serializer = QuejaSerializer(queryset, many=True)
 		return Response(serializer.data)
+
+@api_view(['GET'])
+def cargarNoticia(request, format=None):
+	noticia = Queja.objects.get(pk=pk)
+	serializer = QuejaSerializer(queryset, many=True)
+	return Response(serializer.data)
