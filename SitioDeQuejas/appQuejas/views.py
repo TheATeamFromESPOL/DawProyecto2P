@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import *
-from .serializers import *
+#from .serializers import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 
@@ -12,9 +12,12 @@ from rest_framework import permissions
 
 
 def cargarNoticias(request):
-	queryset=Queja.objects.all()
+
+	usuario = request.session.get('username',None)
+	quejas=Queja.objects.all()
 	queryset=queryset[:6]
-	return render(request,'appQuejas/noticiasIndex.html',{'quejas':queryset})
+	return render(request,'appQuejas/noticiasIndex.html',{})
+
 
 def quienesSomos(request):
 	#Esto es lo mismo siempre
