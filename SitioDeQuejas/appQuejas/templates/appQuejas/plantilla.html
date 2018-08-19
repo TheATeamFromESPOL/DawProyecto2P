@@ -31,9 +31,15 @@
 					<div class="p-2">
 						<button id="botonNuevaQueja" class="btn btn-primary bg-primary" type="submit">Nueva Queja</button>
 					</div>
-					<div class="p-2 align-self-center">
-						<a href="{% url 'iniciarSesion' %}"><span class="icon-users"></span>Iniciar sesión</a> │ <a href="{% url 'registro' %}">Registrarse</a>
-					</div>
+					{% if request.user.is_authenticated %}
+						<div class="p-2 align-self-center">
+							<a href="{% url 'iniciarSesion' %}"><span class="icon-users"></span>{{request.user.username}}</a> │ <a href="{% url 'salirSesion' %}">Cerrar Sesión</a>
+						</div>
+					{% else %}
+						<div class="p-2 align-self-center">
+							<a href="{% url 'iniciarSesion' %}"><span class="icon-users"></span>Iniciar sesión</a> │ <a href="{% url 'registro' %}">Registrarse</a>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 

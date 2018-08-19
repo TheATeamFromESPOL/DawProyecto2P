@@ -6,8 +6,7 @@ from rest_framework import status
 from .models import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-from django.contrib.auth import authenticate,login
-
+from django.contrib.auth import authenticate,login,logout
 from .serializers import *
 
 def cargarNoticias(request):
@@ -42,7 +41,7 @@ def iniciarSesion(request):
 
 def salirSesion(request):
 	logout(request)
-	return redirect("appQuejas:cargarNoticias")
+	return redirect("/")
 
 def contactenos(request):
 	#Solo es un formulario de contacto.
