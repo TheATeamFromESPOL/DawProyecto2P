@@ -1,18 +1,33 @@
 {% extends 'appQuejas/plantilla.html' %}
 {%block content%}
-			<nav >
-				<ul class="row">
-					<li class="col activo"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
-					<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
-					<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
-					<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
-					</ul>
-			</nav>
-		</header>
-		<div class="content">
-			<div id="conjuntoDeQuejas" class="filaQuejas d-flex flex-wrap align-items-center justify-content-center">
-			</div>
-			<script src="js/jquery.min.js"></script>
-			<script src="js/index.js"></script>
-			<script src="js/menu.js"></script>
+	<nav >
+		<ul class="row">
+			<li class="col activo"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+			<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+			<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+			<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+			</ul>
+	</nav>
+	</header>
+	<div class="content">
+		<div id="conjuntoDeQuejas" class="filaQuejas d-flex flex-wrap align-items-center justify-content-center">
+			{%for queja in quejas%}
+				<div class="previaConImagen col-md-3 p-1 align-self-stretch d-flex flex-column">
+					<div class="encabezadoQueja">
+						<div class="tituloQueja"> <h3 id="{{queja.pk}}">{{queja.titulo}}</h3></div>
+						<h6>{{queja.categoria.nombre}}</h6>
+					</div>
+					<div class="contenidoQueja">
+						<img class="imagenQueja" src="{{queja.imagen}}">
+					</div>
+					<div class="pieQueja align-self-baseline">
+						<button type="button" class="btn btn-primary bg-primary ml-auto"> Comentar <span class="badge badge-light"></span></button>
+					</div>
+				</div>
+			{%endfor%}
+
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/menu.js"></script>
 {%endblock%}

@@ -1,13 +1,47 @@
 {% extends 'appQuejas/plantilla.html' %}
 {%block content%}
-			<nav >
-				<ul class="row">
-					<li class="col"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
-					<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
-					<li class="col activo"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
-					<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
-					</ul>
-			</nav>
-		</header>
-		<div class="content">
+		<nav >
+			<ul class="row">
+				<li class="col"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+				<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+				<li class="col activo"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+				<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+				</ul>
+		</nav>
+	</header>
+	<div class="jumbotron titulo">
+		<h3>Explicación del proyecto y desarrolladores</h3>
+	</div>
+	<div id="team" class="pb-5">
+		<div class="container">
+			<H4>Explicación</H4>
+			<p>Este es un sitio web en el cual las personas podrán publicar sus quejas en un tema en específico.<br><br>Esto es sencillo: <br> 		- Piensa en algo que no te guste de tu barrio, ciudad, o lo que quieras. <br> 		- Escribe tu queja. <br> 		- Profit.</p>
+			<H4>Desarrolladores</H4>
+			<div id="integrantes" class="d-flex flex-wrap justify-content-center">
+			</div>
+		</div>
+	</div>
+	<div class="jumbotron titulo">
+		<h3>Línea de Tiempo de los desarrolladores en ESPOL</h3>    
+	</div>
+	<div id="sectionTimeline">
+		<div id="timeline" class="lineaTiempo">
+		</div>
+	</div>
+	<br>
+	<div class="jumbotron titulo">
+		<h3>Estadísticas de quejas por Categoria</h3>
+	</div>
+	<div class="d-flex flex-wrap justify-content-center">
+		<div id="statistics" class="col-md-4 p-2 m-5">
+			<canvas id="myChart" width="400" height="400">		
+			</canvas>
+		</div>
+	</div>
+
+	<script src="js/d3.v3.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/menu.js"></script>
+	<script src="js/quienesSomos.js"></script>
+	<script src="js/Chart.min.js"></script>
 {%endblock%}

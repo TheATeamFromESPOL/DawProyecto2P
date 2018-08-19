@@ -5,13 +5,10 @@ from rest_framework.response import Response
 from .models import *
 #from .serializers import *
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
+
 def cargarNoticias(request):
-	if request.method == 'GET':
-		#Debe cargar las quejas. Las más recientes deben colocarse en la primera página, y las últimas en la última página.
-		#O podemos seguir el ejemplo de 9gag.com. Añade más "items" mientras bajamos por la página.
-	return render(request,'appQuejas/noticiasIndex.html',{})
+	quejas=Queja.objects.all()
+	return render(request,'appQuejas/noticiasIndex.html',{"quejas":quejas})
 
 def quienesSomos(request):
 	#Esto es lo mismo siempre
