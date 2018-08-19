@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,render_to_response,get_object_or_404
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,16 +7,16 @@ from .models import *
 #from .serializers import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
+from django.contrib.auth import authenticate,login
 
 #from .serializers import *
 
 
 def cargarNoticias(request):
-
 	usuario = request.session.get('username',None)
 	quejas=Queja.objects.all()
-	queryset=queryset[:6]
-	return render(request,'appQuejas/noticiasIndex.html',{})
+	queryset=quejas[:6]
+	return render(request,'appQuejas/noticiasIndex.html',{"quejas":queryset})
 
 
 def quienesSomos(request):
@@ -30,7 +30,18 @@ def registro(request):
 	return render(request, 'appQuejas/registro.html',{})
 
 def iniciarSesion(request):
-	return render(request, 'appQuejas/iniciarSesion.html',{})
+	if request.method == 'POST':
+		usuario = authenticate(request,username=request.POST.get('nombreUsuario'),password=request.POST.get('password'))
+		if usuario is not None:
+			login(request,usuario)
+			return redirect("/")
+		else:
+			return render(request, 'appQuejas/iniciarSesion.html', {"mensaje":"Tu usuario y contraseña no coinciden. Intenta de nuevo."})
+	return render(request, 'appQuejas/iniciarSesion.html',{"mensaje":""})
+
+def salirSesion(request):
+	logout(request)
+	return redirect("appQuejas:cargarNoticias")
 
 def contactenos(request):
 	#Solo es un formulario de contacto.

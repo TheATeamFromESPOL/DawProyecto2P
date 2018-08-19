@@ -15,7 +15,7 @@ class Queja(models.Model):
 	titulo = models.CharField(max_length=300)
 	categoria = models.ForeignKey('Categoria',on_delete=models.CASCADE)
 	fechaCreacion = models.DateField(auto_now=True)
-	imagen = models.ImageField(upload_to='imgs/')
+	imagen = models.CharField(max_length=500)
 	descripcion = models.CharField(max_length=1000)
 	usuario = models.ForeignKey(User,related_name='usuario',on_delete=models.CASCADE)
 
