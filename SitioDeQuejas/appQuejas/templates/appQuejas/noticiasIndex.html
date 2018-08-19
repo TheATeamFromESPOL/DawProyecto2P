@@ -1,5 +1,8 @@
 {% extends 'appQuejas/plantilla.html' %}
 {% load staticfiles %}
+{% block css  %}
+
+{% endblock %}
 
 {%block content%}
 	<nav >
@@ -17,7 +20,7 @@
 			{%for queja in quejas%}
 				<div class="previaConImagen col-md-3 p-1 align-self-stretch d-flex flex-column">
 					<div class="encabezadoQueja">
-						<div class="tituloQueja"> <h3 id="{{queja.pk}}">{{queja.titulo}}</h3></div>
+						<div class="tituloQueja"> <a href="{% url 'noticia' pk=queja.pk %}"><h3 id="{{queja.pk}}">{{queja.titulo}}</h3></a></div>
 						<h6>{{queja.categoria.nombre}}</h6>
 					</div>
 					<div class="contenidoQueja">

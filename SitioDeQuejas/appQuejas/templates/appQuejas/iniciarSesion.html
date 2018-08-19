@@ -1,4 +1,7 @@
 {% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css  %}
+{% endblock %}
 {%block content%}
 	<div class="container">
 		<br><br> 
@@ -23,3 +26,7 @@
 		{{mensaje}}
 	</div>
 {%endblock%}
+{% block scripts %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

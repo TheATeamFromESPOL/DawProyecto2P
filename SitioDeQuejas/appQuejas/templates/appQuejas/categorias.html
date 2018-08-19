@@ -1,4 +1,8 @@
 {% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css  %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/categorias.css'%}">
+{% endblock %}
 {%block content%}
 			<nav >
 				<ul class="row">
@@ -14,3 +18,9 @@
 		<div class="content">
 	
 {%endblock%}
+{% block scripts %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/categorias.js' %}"></script>
+	<script src="{% static 'js/menu.js' %}"></script>
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

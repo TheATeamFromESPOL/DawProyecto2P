@@ -1,16 +1,17 @@
 (function(){
-	$.ajax({
+	/*console.log("ccbjkb")
+	#$.ajax({
 		type: "GET",
 		url: "/ajax/enviarQuejas/",
 		dataType: "json",
 		success: obtenerQuejas
-	});
+	});*/
+	
 })();
-
-
+/*
 function cargarNoticia(){
-    var noticiaId=$(this).attr('id');
-    window.location="noticia/"+noticiaId;
+    var pk=$(this).attr('id');
+    window.location="noticia/"+pk;
 }
 
 function obtenerQuejas(data){
@@ -45,6 +46,6 @@ function obtenerQuejas(data){
 		previaQueja.append(pieQueja);
 		previaQueja.appendTo("#conjuntoDeQuejas");
 	}
-	$(".tituloQueja").find('*').click(cargarNoticia);			
+	#$(".tituloQueja").find('*').click(cargarNoticia);			
 
-}
+}*/

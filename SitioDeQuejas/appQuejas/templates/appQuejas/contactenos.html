@@ -1,4 +1,8 @@
 {% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css  %}
+
+{% endblock %}
 {%block content%}
 			<nav >
 				<ul class="row">
@@ -28,10 +32,12 @@
 						<div class="d-flex justify-content-center">
 							<button type="button" id="botonEnviar" class="colorBtn btn btn-default col-12">ENVIAR</button>
 						</div>
-						<script src="js/jquery.min.js"></script>
-						<script src="js/contactenos.js"></script>
-						<script src="js/menu.js"></script>
 					</form>
 				</div>
 			</section>
 {%endblock%}
+{% block scripts %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/menu.js' %}"></script>
+	<script src="{% static 'js/contactenos.js' %}"></script>
+{% endblock %}
