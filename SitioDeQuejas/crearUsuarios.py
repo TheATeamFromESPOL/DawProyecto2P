@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 
 print("Creando Usuarios de la base...")
 user = User.objects.create_superuser('llullanqui','larizaga@espol.edu.ec','l1234567')
+user = User.objects.create_superuser('liarias','liarias@espol.edu.ec','lucio965')
 user = User.objects.create_user('omorland0','ghannigan0@telegraph.co.uk','fbJpd9')
 user = User.objects.create_user('kferras1','joleagham1@springer.com','dEFvMVA')
 user = User.objects.create_user('eharker2','slanchbury2@umn.edu','dmlVElDgRT')
