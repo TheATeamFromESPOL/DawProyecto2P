@@ -1,4 +1,8 @@
 {% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css  %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registro.css' %}">
+{% endblock %}
 {%block content%}
 	<div class="container">
 		<br>
@@ -17,8 +21,6 @@
 				<label for="numeroCelular">Celular:</label>
 				<span id="consultaDeCelular">(?)</span>
 				<span id="porqueCelular" class="esconder">Para que las organizaciones pertinentes se puedan poner en contacto contigo.</span><br>
-				<script src="js/jquery.min.js"></script>
-				<script src="js/registro.js"></script>
 				<input class="form-control" type="text" name="numeroCelular" id="numeroCelular" placeholder="Numero de celular">
 			</div>	
 			<!-- El símbolo (?) es para que el usuario pase el mouse sobre él y se muestre un mensaje de por qué se necesita esa información -->
@@ -56,4 +58,7 @@
 		</form>
 	</div>
 {%endblock%}
-		
+{% block scripts %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/registro.js' %}"></script>
+{% endblock %}

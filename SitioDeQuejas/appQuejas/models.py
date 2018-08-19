@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Persona(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User,related_name='persona', on_delete=models.CASCADE)
 	nombrePersona = models.CharField(max_length=255)
 	apellidoPersona = models.CharField(max_length=255)
 	profesion = models.CharField(max_length=100)
@@ -17,7 +17,7 @@ class Queja(models.Model):
 	fechaCreacion = models.DateField(auto_now=True)
 	imagen = models.ImageField(upload_to='imgs/')
 	descripcion = models.CharField(max_length=1000)
-	usuario = models.ForeignKey(User,related_name='usuario',on_delete=models.CASCADE)
+	usuario = models.ForeignKey(User,related_name='queja',on_delete=models.CASCADE)
 
 class Categoria(models.Model):
 	nombre = models.CharField(max_length=100)

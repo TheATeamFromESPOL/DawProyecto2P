@@ -1,24 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import *
-#from .serializers import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 
-#from .serializers import *
-
+from .serializers import *
 
 def cargarNoticias(request):
-
 	usuario = request.session.get('username',None)
 	quejas=Queja.objects.all()
-	queryset=queryset[:6]
-	return render(request,'appQuejas/noticiasIndex.html',{})
+	quejas=quejas[:6]
+	return render(request,'appQuejas/noticiasIndex.html',{'quejas':quejas})
 
-
+def noticiaSeleccionada(request,pk):
+	queja=Queja.objects.get(pk=pk)
+	return render(request, 'appQuejas/noticia.html',{'queja':queja})
+	
 def quienesSomos(request):
 	#Esto es lo mismo siempre
 	return render(request, 'appQuejas/quienesSomos.html',{})
@@ -37,22 +37,25 @@ def contactenos(request):
 	#Si el usuario está loggeado, varios de los campos se deberían de sobreescribir con los datos del usuario.
 	return render(request, 'appQuejas/contactenos.html',{})
 
-def noticiaSeleccionada(request,pk):
-	noticia = Queja.objects.get(pk=pk)
-	serializer = QuejaSerializer(noticia, many=False)
-	return render(request, 'appQuejas/noticia.html',{})
 
 
 @permission_classes((permissions.AllowAny,))
-class cargarNoti(APIView):
+class ListarQuejas(APIView):
 	def get(self, request, format=None):
 		queryset=Queja.objects.all()
 		queryset=queryset[:6]
 		serializer = QuejaSerializer(queryset, many=True)
 		return Response(serializer.data)
 
-@api_view(['GET'])
-def cargarNoticia(request, format=None):
-	noticia = Queja.objects.get(pk=pk)
-	serializer = QuejaSerializer(queryset, many=True)
-	return Response(serializer.data)
+@permission_classes((permissions.AllowAny,))
+class DetalleQuejas(APIView):
+	def get_object(self, pk):
+		try:
+			return Queja.objects.get(pk=pk)
+		except Queja.DoesNotExist:
+			raise Http404
+	def get(self, request, pk, format=None):
+		pk=pkGlobal
+		snippet = self.get_object(pk)
+		serializer = QuejaSerializer(snippet)
+		return Response(serializer.data)
