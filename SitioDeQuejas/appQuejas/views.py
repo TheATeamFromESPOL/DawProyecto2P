@@ -7,8 +7,9 @@ from .models import *
 
 
 def cargarNoticias(request):
+	usuario = request.session.get('username',None)
 	quejas=Queja.objects.all()
-	return render(request,'appQuejas/noticiasIndex.html',{"quejas":quejas})
+	return render(request,'appQuejas/noticiasIndex.html',{"usuario":usuario,"quejas":quejas})
 
 def quienesSomos(request):
 	#Esto es lo mismo siempre
