@@ -1,0 +1,33 @@
+{% extends 'appQuejas/plantilla.html' %}
+{%block content%}
+	<nav >
+		<ul class="row">
+			<li class="col activo"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+			<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+			<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+
+			<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+			</ul>
+	</nav>
+	<div class="content">
+		<div id="noticia" class="d-flex flex-wrap justify-content-center">
+			<div class="previaConImagen border col-md-4 p-2 m-5">
+				<div id="idQueja" class="encabezadoQueja">
+					<h3 id="{{queja.pk}}"class="tituloQueja">{{queja.titulo}}</h3>
+					<h6>"{{queja.categoria}}"</h6>
+				</div>
+				<div class="contenidoQueja">
+					<img class="imagenQueja" src="{{queja.imagen}}">
+					<p class="textoQueja">{{queja.descripcion}}</p>
+				</div>
+				<div class="pieQueja align-self-baseline">
+					<p class="mr-auto d-flex "><br><strong>Posteado por:  </strong><a href="#home" class="mr-auto"> {{queja.usuario.nombre}}</a></p>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+	<script src="js/noticia.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/menu.js"></script>
+{%endblock%}

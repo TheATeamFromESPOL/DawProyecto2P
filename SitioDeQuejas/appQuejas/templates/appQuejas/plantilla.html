@@ -42,8 +42,10 @@
 	 
 			
 			{%block content%}
-			{%endblock%}			
-
+			{%endblock%}	
+			
+			{% block scripts %}
+			{% endblock %}
 			<!-- Pie de pagina en todas las paginas -->
 			<footer>
 				<div class="p-2 align-items-center">
@@ -52,86 +54,7 @@
 					pública o distribución sin autorización previa del titular de los derecho. &#xA9; </p>
 				</div>
 			</footer>
-		</div>
-
-		<article id="nuevaQueja" class="esconder">
-			<div id="cuadroNuevaQueja" class="d-flex flex-column border p-2 col-md-12">
-				<div id="nuevaQuejaArriba">
-					<div class="d-flex bd-highlight">
-						<h4 class="p-1 flex-grow-1 bd-highlight textoCentrado">Nueva Queja</h4>
-						<button id="cerrarCuadroQueja" class="btn btn-primary" type="submit">Cerrar</button>
-					</div>
-					<div class="form-group">
-						<label for="inputTitulo">Titulo: </label>
-						<input class="form-control" type="text" name="inputTitulo" id="inputTitulo" placeholder="¿De qué te estás quejando?">
-					</div>
-					<div class="form-group">
-						<label for="explicacionQueja">Explica tu queja:</label><br>
-						<textarea class="form-control" name="explicacionQueja" id="explicacionQueja" placeholder="¿Por qué te estás quejando? ¿Qué sugerencias tienes para mejorar esta situación?" rows=4></textarea>
-					</div>
-				</div>
-				<div id="pieDeNuevaQueja" class="d-flex flex-wrap bd-highlight align-items-center">
-					<div class="form-group col-sm-4">
-						<label for="imagen">Carga una foto de prueba: </label><br>
-						<input type="file" accept=".jpeg,.jpg,.png" id="imagen" name="imagen">
-					</div>
-					<div style="height: 100%" class="col-sm-6 ml-auto bd-highlight">
-						<label>La queja se guardará con la siguiente ubicación: </label>
-						<div id="map" style="height: 50%"></div>
-					    <script>
-					      // Note: This example requires that you consent to location sharing when
-					      // prompted by your browser. If you see the error "The Geolocation service
-					      // failed.", it means you probably did not give permission for the browser to
-					      // locate you.
-					      var map, infoWindow;
-					      function initMap() {
-					        map = new google.maps.Map(document.getElementById('map'), {
-					          center: {lat: -34.397, lng: 150.644},
-					          zoom: 6
-					        });
-					        infoWindow = new google.maps.InfoWindow;
-
-					        // Try HTML5 geolocation.
-					        if (navigator.geolocation) {
-					          navigator.geolocation.getCurrentPosition(function(position) {
-					            var pos = {
-					              lat: position.coords.latitude,
-					              lng: position.coords.longitude
-					            };
-
-					            infoWindow.setPosition(pos);
-					            infoWindow.setContent('Location found.');
-					            infoWindow.open(map);
-					            map.setCenter(pos);
-					          }, function() {
-					            handleLocationError(true, infoWindow, map.getCenter());
-					          });
-					        } else {
-					          // Browser doesn't support Geolocation
-					          handleLocationError(false, infoWindow, map.getCenter());
-					        }
-					      }
-
-					      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-					        infoWindow.setPosition(pos);
-					        infoWindow.setContent(browserHasGeolocation ?
-					                              'Error: The Geolocation service failed.' :
-					                              'Error: Your browser doesn\'t support geolocation.');
-					        infoWindow.open(map);
-					      }
-					    </script>
-					    <script async defer
-				    	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqu9ajkcxa1aK7OWj_hbw50VCmwCDM3Eo&callback=initMap">
-				    	</script>
-				    </div>
-				</div>
-				<br>
-				<div class="d-flex justify-content-center">
-					<button type="button" id="botonEnviar" class="btn btn-default col-12">ENVIAR</button>
-				</div>
-			</div>
-		</article>
-		<script src="js/crearQueja.js"></script>	
+		</div>	
 	</body>
 
 </html>
