@@ -10,8 +10,8 @@ from django.contrib.auth import authenticate,login
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect 
 from .forms import ContactForm
-
 from .serializers import *
+
 
 def cargarNoticias(request):
 	usuario = request.session.get('username',None)
@@ -78,8 +78,7 @@ def contactenos(request):
 		    except BadHeaderError:
 		        return HttpResponse('Invalid header found.')
 		    return redirect('thanks')
-	return render(request, "appQuejas/contactenos.html", {'form': form})
-	
+	return render(request, "appQuejas/contactenos.html", {'form': form})	
 
 def thanks(request):
 	return HttpResponse('Success! Thank you for your message.')
