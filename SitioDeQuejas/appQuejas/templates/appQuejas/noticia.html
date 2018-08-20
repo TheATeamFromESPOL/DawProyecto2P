@@ -18,16 +18,39 @@
 			<div class="previaConImagen border col-md-4 p-2 m-5">
 				<div id="idQueja" class="encabezadoQueja">
 					<h3 id="{{queja.pk}}"class="tituloQueja">{{queja.titulo}}</h3>
-					<h6>"{{queja.categoria}}"</h6>
+					<h6>"{{queja.categoria.nombre}}"</h6>
 				</div>
 				<div class="contenidoQueja">
 					<img class="imagenQueja" src="{{queja.imagen}}">
 					<p class="textoQueja">{{queja.descripcion}}</p>
 				</div>
 				<div class="pieQueja align-self-baseline">
-					<p class="mr-auto d-flex "><br><strong>Posteado por:  </strong><a href="#home" class="mr-auto"> {{queja.usuario.nombre}}</a></p>
+					<p class="mr-auto d-flex "><br><strong>Posteado por: </strong><a href="#home" class="mr-auto">  {{queja.usuario.username}}</a></p>
 				</div>
+				<div class= "post-comment">
+					<div class="CS3">
+						<div class="tab-bar clearfix">
+							<div></div>
+						</div>
+						<div class="comment-embed"> 
+							<div class="comment-box first">
+								<div>
+									<div></div>
+								</div>
+							</div>
+							<div>
+								<div></div>
+								<div></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
 			</div>
+
+
 			
 		</div>
 	</div>	

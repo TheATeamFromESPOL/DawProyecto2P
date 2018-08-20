@@ -7,7 +7,7 @@
 		<br><br> 
 		<h3>Iniciar sesión</h3>
 		<h5>Inicia sesión para publicar tus quejas, e interactuar con las de otros.</h5>
-		<form id="formularioInicioSesión" class="col-12" method="POST" action="{% url 'iniciarSesion' %}">
+		<form id="formularioInicioSesión" class="col-12" method="post" action="{% url 'iniciarSesion' %}">
 			{% csrf_token %}
 			<div class="form-group">
 				<label for="nombreUsuario">Usuario:</label><br>
@@ -15,7 +15,7 @@
 			</div>
 			<div class="form-group">
 				<label for="password">Contraseña:</label><br>
-				<input class="form-control" type="text" name="password" id="password" placeholder="Contraseña a utilizar"><br>
+				<input class="form-control" type="password" name="password" id="password" placeholder="Contraseña a utilizar"><br>
 			</div>
 			
 			<div class="d-flex justify-content-center">
