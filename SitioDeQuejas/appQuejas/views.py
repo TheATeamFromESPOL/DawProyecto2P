@@ -6,9 +6,12 @@ from rest_framework import status
 from .models import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect 
+from .forms import ContactForm
+
 from .serializers import *
-from django.contrib.auth.models import User
 
 def cargarNoticias(request):
 	usuario = request.session.get('username',None)
@@ -44,29 +47,42 @@ def registro(request):
 		else:
 			user = User.objects.create_user(request.POST.get('nombreUsuario'),request.POST.get('correoUsuario'),request.POST.get('password'))
 			render(request, 'appQuejas/iniciarSesion.html',{"mensaje":"Usuario exitosamente creado, ahora puede iniciar sesion xD"})
+
 	return render(request, 'appQuejas/registro.html',{})
 
-
-
 def iniciarSesion(request):
-	if request.method == 'POST':
-		usuario = authenticate(request,username=request.POST.get('nombreUsuario'),password=request.POST.get('password'))
-		if usuario is not None:
-			login(request,usuario)
-			return redirect("/")
-		else:
-			return render(request, 'appQuejas/iniciarSesion.html', {"mensaje":"Tu usuario y contraseña no coinciden. Intenta de nuevo."})
-	return render(request, 'appQuejas/iniciarSesion.html',{"mensaje":""})
+    if request.method == 'POST':
+        usuario = authenticate(request,username=request.POST.get('nombreUsuario'),password=request.POST.get('password'))
+        if usuario is not None:
+            login(request,usuario)
+            return redirect("/")
+        else:
+            return render(request, 'appQuejas/iniciarSesion.html', {"mensaje":"Tu usuario y contraseña no coinciden. Intenta de nuevo."})
+    return render(request, 'appQuejas/iniciarSesion.html',{"mensaje":""})
 
 def salirSesion(request):
 	logout(request)
-	return redirect("/")
+	return redirect("appQuejas:cargarNoticias")
 
 def contactenos(request):
-	#Solo es un formulario de contacto.
-	#Si el usuario está loggeado, varios de los campos se deberían de sobreescribir con los datos del usuario.
-	return render(request, 'appQuejas/contactenos.html',{})
+	if request.method == 'GET':
+		form = ContactForm()
+	else:
+		form = ContactForm(request.POST)
+		if form.is_valid():
+		    subject = form.cleaned_data['subject']
+		    from_email = form.cleaned_data['from_email']
+		    message = form.cleaned_data['message']
+		    try:
+		        send_mail(subject, message, from_email, ['knlopez@espol.edu.ec'])
+		    except BadHeaderError:
+		        return HttpResponse('Invalid header found.')
+		    return redirect('thanks')
+	return render(request, "appQuejas/contactenos.html", {'form': form})
+	
 
+def thanks(request):
+	return HttpResponse('Success! Thank you for your message.')
 
 
 @permission_classes((permissions.AllowAny,))
@@ -85,18 +101,7 @@ class DetalleQuejas(APIView):
 		except Queja.DoesNotExist:
 			raise Http404
 	def get(self, request, pk, format=None):
-		queja = self.get_object(pk)
+		pk=pkGlobal
+		snippet = self.get_object(pk)
 		serializer = QuejaSerializer(snippet)
 		return Response(serializer.data)
-	def put(self, request, pk, format=None):
-		queja = self.get_object(pk)
-		serializer = QuejaSerializer(snippet, data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-	def delete(self, request, pk, format=None):
-		queja = self.get_object(pk)
-		queja.delete()
-		return Response(status=status.HTTP_204_NO_CONTENT)
