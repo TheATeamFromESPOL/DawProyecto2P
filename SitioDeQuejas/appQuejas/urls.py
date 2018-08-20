@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^noticia/(?P<pk>[0-9]+)/$', views.noticiaSeleccionada, name="noticia"),
     
     url(r'^ajax/enviarQuejas/$', views.ListarQuejas.as_view(), name='cargar'),
-    url(r'^ajax/cargarNoticia/$', views.DetalleQuejas.as_view(), name='cargarNoticia'),
+    url(r'^ajax/manejarQueja/$', views.DetalleQuejas.as_view(), name='cargarNoticia'),
 ]

@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth import authenticate,login,logout
 from .serializers import *
+from django.contrib.auth.models import User
 
 def cargarNoticias(request):
 	usuario = request.session.get('username',None)
@@ -27,7 +28,24 @@ def categorias(request):
 	return render(request, 'appQuejas/categorias.html',{})
 
 def registro(request):
+	if request.method == 'POST':
+		print("scscscv")
+		contraseña = request.POST.get('password')==request.POST.get('passwordRepeat');
+		try:
+			usuario = User.objects.get(username=request.POST.get('nombreUsuario'))
+		except User.DoesNotExist:
+		    usuario = None
+		print(usuario,contraseña)
+		if(usuario!=None):
+			return render(request, 'appQuejas/registro.html',{'mensaje':'Usuario ya Registrado'})
+		elif(contraseña!=True):
+			return render(request, 'appQuejas/registro.html',{'mensaje':'Contraseñas no coinciden'})
+		else:
+			user = User.objects.create_user(request.POST.get('nombreUsuario'),request.POST.get('correoUsuario'),request.POST.get('password'))
+			return redirect("/")
 	return render(request, 'appQuejas/registro.html',{})
+
+
 
 def iniciarSesion(request):
 	if request.method == 'POST':
@@ -66,7 +84,18 @@ class DetalleQuejas(APIView):
 		except Queja.DoesNotExist:
 			raise Http404
 	def get(self, request, pk, format=None):
-		pk=pkGlobal
-		snippet = self.get_object(pk)
+		queja = self.get_object(pk)
 		serializer = QuejaSerializer(snippet)
 		return Response(serializer.data)
+	def put(self, request, pk, format=None):
+		queja = self.get_object(pk)
+		serializer = QuejaSerializer(snippet, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def delete(self, request, pk, format=None):
+		queja = self.get_object(pk)
+		queja.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
