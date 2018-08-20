@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
+
 class Persona(models.Model):
 	user = models.OneToOneField(User,related_name='persona', on_delete=models.CASCADE)
 	nombrePersona = models.CharField(max_length=255)
