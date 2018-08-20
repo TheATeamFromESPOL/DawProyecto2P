@@ -7,6 +7,9 @@ from .models import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth import authenticate,login
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect 
+from .forms import ContactForm
 
 from .serializers import *
 
@@ -31,24 +34,38 @@ def registro(request):
 	return render(request, 'appQuejas/registro.html',{})
 
 def iniciarSesion(request):
-	if request.method == 'POST':
-		usuario = authenticate(request,username=request.POST.get('nombreUsuario'),password=request.POST.get('password'))
-		if usuario is not None:
-			login(request,usuario)
-			return redirect("/")
-		else:
-			return render(request, 'appQuejas/iniciarSesion.html', {"mensaje":"Tu usuario y contraseña no coinciden. Intenta de nuevo."})
-	return render(request, 'appQuejas/iniciarSesion.html',{"mensaje":""})
+    if request.method == 'POST':
+        usuario = authenticate(request,username=request.POST.get('nombreUsuario'),password=request.POST.get('password'))
+        if usuario is not None:
+            login(request,usuario)
+            return redirect("/")
+        else:
+            return render(request, 'appQuejas/iniciarSesion.html', {"mensaje":"Tu usuario y contraseña no coinciden. Intenta de nuevo."})
+    return render(request, 'appQuejas/iniciarSesion.html',{"mensaje":""})
 
 def salirSesion(request):
 	logout(request)
 	return redirect("appQuejas:cargarNoticias")
 
 def contactenos(request):
-	#Solo es un formulario de contacto.
-	#Si el usuario está loggeado, varios de los campos se deberían de sobreescribir con los datos del usuario.
-	return render(request, 'appQuejas/contactenos.html',{})
+	if request.method == 'GET':
+		form = ContactForm()
+	else:
+		form = ContactForm(request.POST)
+		if form.is_valid():
+		    subject = form.cleaned_data['subject']
+		    from_email = form.cleaned_data['from_email']
+		    message = form.cleaned_data['message']
+		    try:
+		        send_mail(subject, message, from_email, ['knlopez@espol.edu.ec'])
+		    except BadHeaderError:
+		        return HttpResponse('Invalid header found.')
+		    return redirect('thanks')
+	return render(request, "appQuejas/contactenos.html", {'form': form})
+	
 
+def thanks(request):
+	return HttpResponse('Success! Thank you for your message.')
 
 
 @permission_classes((permissions.AllowAny,))

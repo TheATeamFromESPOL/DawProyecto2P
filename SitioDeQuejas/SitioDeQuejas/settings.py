@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appQuejas',
     'rest_framework',
+    'bootstrapform',
+  
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
