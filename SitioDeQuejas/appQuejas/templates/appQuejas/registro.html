@@ -11,6 +11,7 @@
 		
 		<form id="formularioRegistro" class="col-12" method="POST" action="{% url 'registro' %}">
 			{% csrf_token %}
+			<h3 id="mensaje">{{mensaje}}</h3>
 			<div class="form-group">
 				<label for="nombreUsuario">Usuario:</label><br>
 				<input class="form-control" type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Nombre de usuario a usar"><br>
@@ -44,7 +45,7 @@
 			</div>
 			<br><br><br>
 		</form>
-		{{mensaje}}
+		
 	</div>
 {%endblock%}
 {% block scripts %}

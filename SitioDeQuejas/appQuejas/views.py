@@ -29,7 +29,6 @@ def categorias(request):
 
 def registro(request):
 	if request.method == 'POST':
-		print("scscscv")
 		contraseña = request.POST.get('password')==request.POST.get('passwordRepeat');
 		try:
 			usuario = User.objects.get(username=request.POST.get('nombreUsuario'))
@@ -37,12 +36,14 @@ def registro(request):
 		    usuario = None
 		print(usuario,contraseña)
 		if(usuario!=None):
-			return render(request, 'appQuejas/registro.html',{'mensaje':'Usuario ya Registrado'})
+			return render(request, 'appQuejas/registrso.html',{'mensaje':'Usuario ya Registrado'})
 		elif(contraseña!=True):
 			return render(request, 'appQuejas/registro.html',{'mensaje':'Contraseñas no coinciden'})
+		elif(len(request.POST.get('password'))==0):
+			return render(request, 'appQuejas/registro.html',{'mensaje':'Campo contraseña vacio'})
 		else:
 			user = User.objects.create_user(request.POST.get('nombreUsuario'),request.POST.get('correoUsuario'),request.POST.get('password'))
-			return redirect("/")
+			render(request, 'appQuejas/iniciarSesion.html',{"mensaje":"Usuario exitosamente creado, ahora puede iniciar sesion xD"})
 	return render(request, 'appQuejas/registro.html',{})
 
 
