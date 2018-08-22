@@ -10,8 +10,8 @@ from django.contrib.auth import authenticate,login
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect 
 from .forms import ContactForm
-
 from .serializers import *
+
 
 def cargarNoticias(request):
 	usuario = request.session.get('username',None)
@@ -31,6 +31,23 @@ def categorias(request):
 	return render(request, 'appQuejas/categorias.html',{})
 
 def registro(request):
+	if request.method == 'POST':
+		contraseña = request.POST.get('password')==request.POST.get('passwordRepeat');
+		try:
+			usuario = User.objects.get(username=request.POST.get('nombreUsuario'))
+		except User.DoesNotExist:
+		    usuario = None
+		print(usuario,contraseña)
+		if(usuario!=None):
+			return render(request, 'appQuejas/registrso.html',{'mensaje':'Usuario ya Registrado'})
+		elif(contraseña!=True):
+			return render(request, 'appQuejas/registro.html',{'mensaje':'Contraseñas no coinciden'})
+		elif(len(request.POST.get('password'))==0):
+			return render(request, 'appQuejas/registro.html',{'mensaje':'Campo contraseña vacio'})
+		else:
+			user = User.objects.create_user(request.POST.get('nombreUsuario'),request.POST.get('correoUsuario'),request.POST.get('password'))
+			render(request, 'appQuejas/iniciarSesion.html',{"mensaje":"Usuario exitosamente creado, ahora puede iniciar sesion xD"})
+
 	return render(request, 'appQuejas/registro.html',{})
 
 def iniciarSesion(request):
@@ -52,6 +69,7 @@ def contactenos(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
+<<<<<<< HEAD
 			data = form.cleaned_data
 			send_mail(
 				data['subject'],
@@ -66,6 +84,20 @@ def contactenos(request):
  
 	return render(request, 'appQuejas/contactenos.html', {'form': form})
  
+=======
+		    subject = form.cleaned_data['subject']
+		    from_email = form.cleaned_data['from_email']
+		    message = form.cleaned_data['message']
+		    try:
+		        send_mail(subject, message, from_email, ['knlopez@espol.edu.ec'])
+		    except BadHeaderError:
+		        return HttpResponse('Invalid header found.')
+		    return redirect('thanks')
+	return render(request, "appQuejas/contactenos.html", {'form': form})	
+
+def thanks(request):
+	return HttpResponse('Success! Thank you for your message.')
+>>>>>>> 8b58972ad6208b1719d54c18813d974ee2ab8973
 
 
 @permission_classes((permissions.AllowAny,))

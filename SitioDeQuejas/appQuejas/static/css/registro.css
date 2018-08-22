@@ -1,3 +1,6 @@
 #consultaDeCelular:hover {
 	cursor: pointer;
 }
+#mensaje{
+	color: red;
+}
