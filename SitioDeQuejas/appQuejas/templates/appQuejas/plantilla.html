@@ -47,22 +47,25 @@
 			<div class="menu_bar">
 				<a href="#" class="bt-menu"><span class="icon-menu"></span>Menu</a>
 			</div>
-	 
-			
-			{%block content%}
-			{%endblock%}	
-			
-			{% block scripts %}
-			{% endblock %}
-			<!-- Pie de pagina en todas las paginas -->
-			<footer>
-				<div class="p-2 align-items-center">
-					<h3>Escuela Superior Politécnica del Litoral - Guayaquil - Ecuador</h3>
-					<p>El contenido de esta obra es de propiedad intelectual de la ESPOL y de los estudiantes que la realizaron. Todos los derechos reservados. Prohibida su reproducción total o parcial, comunicación
-					pública o distribución sin autorización previa del titular de los derecho. &#xA9; </p>
-				</div>
-			</footer>
-		</div>	
+
+			{%block header%}
+			{%endblock%}
+		</header>
+
+		{%block content%}
+		{%endblock%}	
+		
+		{% block scripts %}
+		{% endblock %}
+		<!-- Pie de pagina en todas las paginas -->
+		<footer>
+			<div class="p-2 align-items-center">
+				<h3>Escuela Superior Politécnica del Litoral - Guayaquil - Ecuador</h3>
+				<p>El contenido de esta obra es de propiedad intelectual de la ESPOL y de los estudiantes que la realizaron. Todos los derechos reservados. Prohibida su reproducción total o parcial, comunicación
+				pública o distribución sin autorización previa del titular de los derecho. &#xA9; </p>
+			</div>
+		</footer>
+	
 	</body>
 
 </html>

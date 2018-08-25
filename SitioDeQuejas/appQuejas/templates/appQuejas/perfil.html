@@ -1,11 +1,30 @@
 {% extends 'appQuejas/plantilla.html' %}
 {% load staticfiles %}
-{% block css  %}
+{% block css %}
 {% endblock %}
 {%block content%}
 	<h1>Perfil</h1>
-	<h2>{{persona.nombrePersona}}</h2>
-	<h2>{{persona.apellidoPersona}}</h2>
+	<form>
+		<h2>Usuario: {{request.user}}</h2>
+		<table>
+			<tr>
+				<td><h2>Nombre:</h2></td>
+				<td><input type="text" name="nombrePersona" value="{{persona.nombrePersona}}"></td>
+			</tr>
+			<tr>
+				<td><h2>Apellido:</h2></td>
+				<td><input type="text" name="apellidoPersona" value="{{persona.apellidoPersona}}"></td>
+			</tr>
+			<tr>
+				<td><h2>Profesion:</h2></td>
+				<td><input type="text" name="profesion" value="{{persona.profesion}}"></td>
+			</tr>
+			<tr>
+				<td><h2>Número contacto:</h2></td>
+				<td><input type="text" name="numeroContacto" value="{{persona.numeroContacto}}"></td>
+			</tr>
+		</table>
+	</form>
 {%endblock%}
 {% block scripts %}
 	<script src="{% static 'js/jquery.min.js' %}"></script>

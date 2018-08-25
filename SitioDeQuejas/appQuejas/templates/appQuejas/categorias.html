@@ -3,21 +3,22 @@
 {% block css  %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/categorias.css'%}">
 {% endblock %}
-{%block content%}
-			<nav >
-				<ul class="row">
-					<li class="col"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
-					<li class="col activo"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
-					<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
-					<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
-					</ul>
-			</nav>
 
-		</header>
-		
-		<div class="content">
-	
+{%block header%}
+	<nav>
+		<ul class="row">
+			<li class="col activo"><a class="text-center" href="{% url 'index' %}"><span class="icon-home"></span>Inicio</a></li>
+			<li class="col"><a class="text-center" href="{% url 'categorias' %}"><span class="icon-paragraph-justify"></span>Categorias</a></li>
+			<li class="col"><a class="text-center" href="{% url 'quienesSomos' %}"><span class="icon-question"></span>¿Quiénes Somos?</a></li>
+
+			<li class="col"><a class="text-center" href="{% url 'contactenos' %}"><span class="icon-mail2"></span>Contactenos</a></li>
+		</ul>	
+	</nav>
 {%endblock%}
+
+{%block content%}
+{%endblock%}
+
 {% block scripts %}
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/categorias.js' %}"></script>

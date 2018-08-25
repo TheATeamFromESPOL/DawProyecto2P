@@ -108,8 +108,6 @@ class DetalleQuejas(APIView):
 def perfil(request):
 	usuario = request.user.id
 	persona = Persona.objects.get(user=usuario)
-	print(usuario);
-	print(persona);
 	return render(request, 'appQuejas/perfil.html',{"persona":persona})
 
 def pagUsuario(request):
