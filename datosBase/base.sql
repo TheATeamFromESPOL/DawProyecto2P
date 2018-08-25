@@ -1,5 +1,5 @@
-insert into "appQuejas_categoria" (nombre) values ('Barrios/Ciudadelas');
-insert into "appQuejas_categoria" (nombre) values ('Calles/Carreteras');
+insert into "appQuejas_categoria" (nombre) values ('Barrios-Ciudadelas');
+insert into "appQuejas_categoria" (nombre) values ('Calles-Carreteras');
 insert into "appQuejas_categoria" (nombre) values ('Señalética');
 insert into "appQuejas_categoria" (nombre) values ('Municipio');
 insert into "appQuejas_categoria" (nombre) values ('Servicios Básicos');
