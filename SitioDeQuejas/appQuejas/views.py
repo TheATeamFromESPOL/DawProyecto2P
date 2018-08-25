@@ -6,7 +6,7 @@ from rest_framework import status
 from .models import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect 
 from .forms import ContactForm
@@ -14,7 +14,6 @@ from .serializers import *
 
 
 def cargarNoticias(request):
-	usuario = request.session.get('username',None)
 	quejas=Queja.objects.all()
 	queryset=quejas[:6]
 	return render(request,'appQuejas/noticiasIndex.html',{"quejas":queryset})
@@ -62,14 +61,12 @@ def iniciarSesion(request):
 
 def salirSesion(request):
 	logout(request)
-	return redirect("appQuejas:cargarNoticias")
+	return redirect("index")
 
 def contactenos(request):
-	
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
-<<<<<<< HEAD
 			data = form.cleaned_data
 			send_mail(
 				data['subject'],
@@ -83,22 +80,9 @@ def contactenos(request):
         	form = ContactForm()
  
 	return render(request, 'appQuejas/contactenos.html', {'form': form})
- 
-=======
-		    subject = form.cleaned_data['subject']
-		    from_email = form.cleaned_data['from_email']
-		    message = form.cleaned_data['message']
-		    try:
-		        send_mail(subject, message, from_email, ['knlopez@espol.edu.ec'])
-		    except BadHeaderError:
-		        return HttpResponse('Invalid header found.')
-		    return redirect('thanks')
-	return render(request, "appQuejas/contactenos.html", {'form': form})	
 
 def thanks(request):
 	return HttpResponse('Success! Thank you for your message.')
->>>>>>> 8b58972ad6208b1719d54c18813d974ee2ab8973
-
 
 @permission_classes((permissions.AllowAny,))
 class ListarQuejas(APIView):

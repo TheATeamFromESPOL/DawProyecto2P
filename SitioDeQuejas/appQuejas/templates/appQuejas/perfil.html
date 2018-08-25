@@ -1,0 +1,12 @@
+{% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css  %}
+{% endblock %}
+{%block content%}
+	<h1>Perfil</h1>
+	<h2>{{datos.nombrePersona}}</h2>
+{%endblock%}
+{% block scripts %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

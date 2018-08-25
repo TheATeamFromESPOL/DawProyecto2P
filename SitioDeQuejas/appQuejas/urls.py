@@ -8,6 +8,7 @@ urlpatterns = [
     path(r'categorias/',views.categorias,name='categorias'),
     path(r'registro/',views.registro,name='registro'),
     path(r'iniciarSesion/',views.iniciarSesion,name='iniciarSesion'),
+    path(r'salirSesion/',views.salirSesion,name='salirSesion'),
     path(r'contactenos/',views.contactenos,name='contactenos'),
     url(r'^noticia/(?P<pk>[0-9]+)/$', views.noticiaSeleccionada, name="noticia"),
     url(r'^ajax/enviarQuejas/$', views.ListarQuejas.as_view(), name='cargar'),
