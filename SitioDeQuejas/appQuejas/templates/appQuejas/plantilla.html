@@ -33,7 +33,7 @@
 					</div>
 					{% if request.user.is_authenticated %}
 						<div class="p-2 align-self-center">
-							<a href="{% url 'iniciarSesion' %}"><span class="icon-users"></span>{{request.user.username}}</a> │ <a href="{% url 'salirSesion' %}">Cerrar Sesión</a>
+							<a href="{% url 'perfil' %}"><span class="icon-users"></span>{{request.user.username}}</a> │ <a href="{% url 'salirSesion' %}">Cerrar Sesión</a>
 						</div>
 					{% else %}
 						<div class="p-2 align-self-center">

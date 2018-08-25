@@ -104,3 +104,13 @@ class DetalleQuejas(APIView):
 		snippet = self.get_object(pk)
 		serializer = QuejaSerializer(snippet)
 		return Response(serializer.data)
+
+def perfil(request):
+	usuario = request.user.id
+	persona = Persona.objects.get(user=usuario)
+	print(usuario);
+	print(persona);
+	return render(request, 'appQuejas/perfil.html',{"persona":persona})
+
+def pagUsuario(request):
+	return
