@@ -1,5 +1,5 @@
 (function(){ 
-	$.ajax({
+	/*$.ajax({
 		type: "GET",
 		url: "data/quienesSomos.xml",
 		dataType: "xml",
@@ -11,15 +11,15 @@
 		url: "data/timeline.xml",
 		dataType: "xml",
 		success: cargarTimeline
-	});
+	});*/
 	$.ajax({
 		type: "GET",
 		url: "data/quejas.xml",
-		dataType: "xml",
+		dataType: "json",
 		success: cargarEstadisticos
 	});
 })();
-
+/*
 function obtenerIntegrantes(data){
 	$(data).find('integrante').each(function(){
 		var nombres = $(this).find('nombres').text();
@@ -81,7 +81,7 @@ function cargarTimeline(data){
 		nuevo.appendTo("#timeline");
 		i++;
 	});
-}
+}*/
 function cargarEstadisticos(data){
 	var datos2={labels:[],datasets:[{label:"Estadistico por numero de quejas",data:[],backgroundColor: [],borderColor:[]}]
 	}

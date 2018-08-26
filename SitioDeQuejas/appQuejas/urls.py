@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^perfil/',views.perfil,name='perfil'),
     url(r'^user/<username>/',views.pagUsuario,name='pagUsuario'),
     url(r'^noticia/(?P<pk>[0-9]+)/$', views.noticiaSeleccionada, name="noticia"),
-    url(r'^ajax/enviarQuejas/$', views.ListarQuejas.as_view(), name='cargar'),
+    url(r'^ajax/administarQuejas/$', views.ListarQuejas.as_view()),
     url(r'^ajax/cargarNoticia/$', views.DetalleQuejas.as_view(), name='cargarNoticia'),
+    url(r'^ajax/categorias/$', views.Listarcategorias.as_view()),
+
 ]

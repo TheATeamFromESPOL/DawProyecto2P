@@ -14,8 +14,8 @@ class Persona(models.Model):
 class Queja(models.Model):
 	titulo = models.CharField(max_length=300)
 	categoria = models.ForeignKey('Categoria',on_delete=models.CASCADE)
-	fechaCreacion = models.DateField(auto_now=True)
-	imagen = models.CharField(max_length=500)
+	fechaCreacion = models.DateField(auto_now_add=True)
+	imagen = models.CharField(max_length=500,default="imagencita")
 	descripcion = models.CharField(max_length=1000)
 	usuario = models.ForeignKey(User,related_name='queja',on_delete=models.CASCADE)
 

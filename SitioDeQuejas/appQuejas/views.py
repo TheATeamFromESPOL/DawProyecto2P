@@ -92,6 +92,18 @@ class ListarQuejas(APIView):
 		serializer = QuejaSerializer(queryset, many=True)
 		return Response(serializer.data)
 
+	def post(self, request, format=None):
+		print("entra")
+		print(request.data)
+		
+		print(QuejaSerializer(data=request.data))
+		serializer = QuejaSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	
+
 @permission_classes((permissions.AllowAny,))
 class DetalleQuejas(APIView):
 	def get_object(self, pk):
@@ -112,3 +124,9 @@ def perfil(request):
 
 def pagUsuario(request):
 	return
+@permission_classes((permissions.AllowAny,))
+class Listarcategorias(APIView):
+	def get(self, request, format=None):
+		queryset=Categoria.objects.all()
+		serializer = CategoriaSerializer(queryset, many=True)
+		return Response(serializer.data)

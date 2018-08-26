@@ -37,6 +37,35 @@
 			{%endfor%}
 
 		</div>
+		<article id="nuevaQueja" class="esconder">
+			<div id="cuadroNuevaQueja" class="d-flex flex-column border p-2 col-md-12">
+				<div id="nuevaQuejaArriba">
+					<div class="d-flex bd-highlight">
+						<h4 class="p-1 flex-grow-1 bd-highlight textoCentrado">Nueva Queja</h4>
+						<button id="cerrarCuadroQueja" class="btn btn-primary" type="submit">Cerrar</button>
+					</div>
+					<div class="form-group userId" id="">
+						
+					</div>
+					<div class="form-group">
+						<label for="inputTitulo">Titulo: </label>
+						<input class="form-control" type="text" name="inputTitulo" id="inputTitulo" placeholder="¿De qué te estás quejando?">
+					</div>
+					<div class="form-group">
+						<label for="selectCategoria">Categoria: </label>
+						<select class="form-control" id="selectCategoria" name="selectCategoria">
+        				</select>
+					</div>
+					<div class="form-group">
+						<label for="explicacionQueja">Explica tu queja:</label><br>
+						<textarea class="form-control" name="explicacionQueja" id="explicacionQueja" placeholder="¿Por qué te estás quejando? ¿Qué sugerencias tienes para mejorar esta situación?" rows=4></textarea>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center">
+					<button type="button" id="botonEnviarQueja" class="btn btn-default col-12">ENVIAR</button>
+				</div>
+			</div>
+		</article>
 
 {%endblock%}
 
@@ -44,5 +73,6 @@
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/index.js' %}"></script>
 	<script src="{% static 'js/menu.js' %}"></script>
+	<script src="{% static 'js/crearQueja.js' %}"></script>
 {% endblock %}
 			
