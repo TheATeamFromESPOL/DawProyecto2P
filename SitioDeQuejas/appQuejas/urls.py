@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^ajax/administarQuejas/$', views.ListarQuejas.as_view()),
     url(r'^ajax/cargarNoticia/$', views.DetalleQuejas.as_view(), name='cargarNoticia'),
     url(r'^ajax/categorias/$', views.Listarcategorias.as_view()),
+    url(r'^ajax/CategoriaDetalle/(?P<pk>[0-9]+)/$', views.DetalleCategoria.as_view()),
 
 ]
