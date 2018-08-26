@@ -11,17 +11,16 @@ class CategoriaSerializer(serializers.ModelSerializer):
 	
 class PersonaSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Persona
         fields = ('id', 'user', 'nombrePersona', 'apellidoPersona','profesion', 'numeroContacto')
 
 	
 class QuejaSerializer(serializers.ModelSerializer):
-	user = serializers.ReadOnlyField(source='user.username')
-	categoria = serializers.ReadOnlyField(source='categoria.nombre')
-	class Meta:
-		model = Queja
-		fields = ('id', 'titulo', 'categoria', 'fechaCreacion', 'imagen', 'descripcion','user')
+    class Meta:
+        model = Queja
+        fields = ( 'titulo', 'categoria', 'fechaCreacion', 'imagen', 'descripcion','usuario')
 
 		
 class ComentarioSerializer(serializers.ModelSerializer):
@@ -29,4 +28,4 @@ class ComentarioSerializer(serializers.ModelSerializer):
     queja = serializers.ReadOnlyField(source='queja.titulo')
     class Meta:
     	model = Comentario
-    	fields = ('id', 'contenido', 'user', 'fechaCreacion', 'queja')
+    	fields = ( 'contenido', 'usuario', 'fechaCreacion', 'queja')
