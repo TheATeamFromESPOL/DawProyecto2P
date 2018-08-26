@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'appQuejas',
+    'reportes',
     'rest_framework',
     'bootstrapform',
-  
+    'chartjs'  
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'SitioDeQuejas.urls'
+
+DATABASE_ROUTERS = ['reportes.routers.MyApp2Router',]
 
 TEMPLATES = [
     {
@@ -85,6 +88,10 @@ DATABASES = {
         'PASSWORD': 'l1234567',
         'HOST': 'localhost',
         'PORT': '5432',
+    },
+    'reportes': {
+        'ENGINE': 'djongo',
+        'NAME': 'dbreportes',
     }
 }
 

@@ -11,12 +11,15 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect 
 from .forms import ContactForm
 from .serializers import *
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 def cargarNoticias(request):
-	quejas=Queja.objects.all()
-	queryset=quejas[:6]
-	return render(request,'appQuejas/noticiasIndex.html',{"quejas":queryset})
+	listaQuejas=Queja.objects.all()
+	paginator = Paginator(listaQuejas,12) #Mostrar 12 quejas por pagina
+	page = request.GET.get('page')
+	quejas = paginator.get_page(page)
+	return render(request,'appQuejas/noticiasIndex.html',{"quejas":quejas})
 
 def noticiaSeleccionada(request,pk):
 	queja=Queja.objects.get(pk=pk)
@@ -27,7 +30,23 @@ def quienesSomos(request):
 	return render(request, 'appQuejas/quienesSomos.html',{})
 
 def categorias(request):
-	return render(request, 'appQuejas/categorias.html',{})
+	listaCategorias = Categoria.objects.all()
+
+	#if tipo == "inicio":
+	#	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje": "Escoja una categoria para ver"})
+	#categoria = Categoria.objects.get(nombre=tipo)
+	#quejas = Queja.objects.get()
+	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
+
+def categoriaQuejas(request,tipo):
+	listaCategorias = Categoria.objects.all()
+	categoria = Categoria.objects.get(nombre=tipo)
+	listaQuejas = Queja.objects.filter(categoria_id=categoria.id)
+	paginator = Paginator(listaQuejas,6) #Mostrar 12 quejas por pagina
+	page = request.GET.get('page')
+	quejas = paginator.get_page(page)
+	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"quejas": quejas,"mensaje":""})
+
 
 def registro(request):
 	if request.method == 'POST':
