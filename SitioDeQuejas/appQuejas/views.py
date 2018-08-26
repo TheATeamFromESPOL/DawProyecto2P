@@ -132,9 +132,20 @@ class DetalleQuejas(APIView):
 		except Queja.DoesNotExist:
 			raise Http404
 	def get(self, request, pk, format=None):
-		pk=pkGlobal
 		snippet = self.get_object(pk)
 		serializer = QuejaSerializer(snippet)
+		return Response(serializer.data)
+
+@permission_classes((permissions.AllowAny,))
+class DetalleCategoria(APIView):
+	def get_object(self, pk):
+		try:
+			return Categoria.objects.get(pk=pk)
+		except Categoria.DoesNotExist:
+			raise Http404
+	def get(self, request, pk, format=None):
+		categoria = self.get_object(pk)
+		serializer = CategoriaSerializer(categoria)
 		return Response(serializer.data)
 
 def perfil(request):

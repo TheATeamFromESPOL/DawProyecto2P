@@ -4,9 +4,10 @@ from .models import *
 
 
 class CategoriaSerializer(serializers.ModelSerializer):
+    quejas = serializers.StringRelatedField(many=True)
     class Meta:
         model = Categoria
-        fields = ('id', 'nombre')
+        fields = ('id', 'nombre','quejas')
 
 	
 class PersonaSerializer(serializers.ModelSerializer):

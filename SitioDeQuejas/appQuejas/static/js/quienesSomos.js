@@ -15,7 +15,7 @@
 	/*
 	$.ajax({
 		type: "GET",
-		url: "data/quejas.xml",
+		url: "/ajax/categorias/",
 		dataType: "json",
 		success: cargarEstadisticos
 	});*/
@@ -84,29 +84,18 @@ function cargarTimeline(data){
 	});
 }*/
 function cargarEstadisticos(data){
+	console.log(data);
 	var datos2={labels:[],datasets:[{label:"Estadistico por numero de quejas",data:[],backgroundColor: [],borderColor:[]}]
 	}
-	var datos = [];
-	$(data).find('categoria').each(function(){
-		//var categoria={}
-		var nombreCategoria = $(this).find('nombreCategoria').text();
-		datos2["labels"].push(nombreCategoria);
-		//categoria["label"]=nombreCategoria;
-		//categoria["value"]=0;
-		//categoria["color"]=getRandomColor();		
-		var contador=0;
-		var quejas = $(this).find('queja');
-		for(i of quejas){
-			contador++;
-		}
-		datos2["datasets"][0]["data"].push(contador);
+	
+	for(var categoria of data) {
+
+		datos2["labels"].push(categoria.nombre);
+		datos2["datasets"][0]["data"].push(categoria["quejas"].length);
 		datos2["datasets"][0]["backgroundColor"].push(getRandomColor());
 		datos2["datasets"][0]["borderColor"].push("#262726");
-		//categoria.value=contador;
-		//datos.push(categoria);
-	});
-
-
+	
+	}
 	var ctx = $("#myChart");
 	var myDoughnutChart = new Chart(ctx, {
 		type: 'doughnut',
@@ -122,10 +111,6 @@ function cargarEstadisticos(data){
 		}
 	});
 
-	//console.log(datos);
-	console.log(datos2);
-	//tabla.appendTo("#statistics");
-	
 }
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
