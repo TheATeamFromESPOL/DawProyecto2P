@@ -12,12 +12,13 @@
 		dataType: "xml",
 		success: cargarTimeline
 	});*/
+	/*
 	$.ajax({
 		type: "GET",
 		url: "data/quejas.xml",
 		dataType: "json",
 		success: cargarEstadisticos
-	});
+	});*/
 })();
 /*
 function obtenerIntegrantes(data){

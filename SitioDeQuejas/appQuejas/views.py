@@ -30,13 +30,14 @@ def quienesSomos(request):
 	return render(request, 'appQuejas/quienesSomos.html',{})
 
 def categorias(request):
-	listaCategorias = Categoria.objects.all()
+	return redirect("/categorias/Barrios-Ciudadelas")
+	#listaCategorias = Categoria.objects.all()
 
 	#if tipo == "inicio":
 	#	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje": "Escoja una categoria para ver"})
 	#categoria = Categoria.objects.get(nombre=tipo)
 	#quejas = Queja.objects.get()
-	return render(request, 'appQuejas/categorias.html',{"quejas":None,"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
+	#return render(request, 'appQuejas/categorias.html',{"quejas":None,"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
 
 def categoriaQuejas(request,tipo):
 	listaCategorias = Categoria.objects.all()
@@ -143,6 +144,7 @@ def perfil(request):
 
 def pagUsuario(request):
 	return
+
 @permission_classes((permissions.AllowAny,))
 class Listarcategorias(APIView):
 	def get(self, request, format=None):
