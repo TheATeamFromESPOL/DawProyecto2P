@@ -36,12 +36,12 @@ def categorias(request):
 	#	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje": "Escoja una categoria para ver"})
 	#categoria = Categoria.objects.get(nombre=tipo)
 	#quejas = Queja.objects.get()
-	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
+	return render(request, 'appQuejas/categorias.html',{"quejas":None,"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
 
 def categoriaQuejas(request,tipo):
 	listaCategorias = Categoria.objects.all()
 	categoria = Categoria.objects.get(nombre=tipo)
-	listaQuejas = Queja.objects.filter(categoria_id=categoria.id)
+	listaQuejas = Queja.objects.filter(categoria_id=categoria.id).order_by('-fechaCreacion')
 	paginator = Paginator(listaQuejas,6) #Mostrar 12 quejas por pagina
 	page = request.GET.get('page')
 	quejas = paginator.get_page(page)

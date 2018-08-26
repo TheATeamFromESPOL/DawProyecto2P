@@ -25,39 +25,45 @@
 		</nav>
 		<div class="col-md-9">
 			<div class="d-flex flex-wrap">
-				{%for queja in quejas%}
-					<div class="previaConImagen col-md-3 p-1 align-self-stretch d-flex flex-column">
-						<div class="encabezadoQueja">
-							<div class="tituloQueja"> <a href="{% url 'noticia' pk=queja.pk %}"><h3 id="{{queja.pk}}">{{queja.titulo}}</h3></a></div>
-							<h6>{{queja.categoria.nombre}}</h6>
+				{%if quejas != None%}
+					{%for queja in quejas%}
+						<div class="previaConImagen col-md-3 p-1 align-self-stretch d-flex flex-column">
+							<div class="encabezadoQueja">
+								<div class="tituloQueja"> <a href="{% url 'noticia' pk=queja.pk %}"><h3 id="{{queja.pk}}">{{queja.titulo}}</h3></a></div>
+								<h6>{{queja.categoria.nombre}}</h6>
+							</div>
+							<div class="contenidoQueja">
+								<img class="imagenQueja" src="{{queja.imagen}}">
+								<p class="textoQueja">{{queja.descripcion}}</p>
+							</div>
+							<div class="pieQueja align-self-baseline">
+								<button type="button" class="btn btn-primary bg-primary ml-auto"> Comentar <span class="badge badge-light"></span></button>
+							</div>
 						</div>
-						<div class="contenidoQueja">
-							<img class="imagenQueja" src="{{queja.imagen}}">
-							<p class="textoQueja">{{queja.descripcion}}</p>
-						</div>
-						<div class="pieQueja align-self-baseline">
-							<button type="button" class="btn btn-primary bg-primary ml-auto"> Comentar <span class="badge badge-light"></span></button>
-						</div>
-					</div>
-				{%endfor%}
+					{%endfor%}
+				{%else%}
+					<h3>{{mensaje}}</h3>
+				{%endif%}
 			</div>
-			<div class="pagination">
-			    <span class="step-links">
-			        {% if quejas.has_previous %}
-			            <a href="?page=1">&laquo; first</a>
-			            <a href="?page={{ quejas.previous_page_number }}">previous</a>
-			        {% endif %}
+			{%if quejas != None%}
+				<div class="pagination">
+				    <span class="step-links">
+				        {% if quejas.has_previous %}
+				            <a href="?page=1">&laquo; first</a>
+				            <a href="?page={{ quejas.previous_page_number }}">previous</a>
+				        {% endif %}
 
-			        <span class="current">
-			            Page {{ quejas.number }} of {{ quejas.paginator.num_pages }}.
-			        </span>
+				        <span class="current">
+				            Page {{ quejas.number }} of {{ quejas.paginator.num_pages }}.
+				        </span>
 
-			        {% if quejas.has_next %}
-			            <a href="?page={{ quejas.next_page_number }}">next</a>
-			            <a href="?page={{ quejas.paginator.num_pages }}">last &raquo;</a>
-			        {% endif %}
-			    </span>
-			</div>
+				        {% if quejas.has_next %}
+				            <a href="?page={{ quejas.next_page_number }}">next</a>
+				            <a href="?page={{ quejas.paginator.num_pages }}">last &raquo;</a>
+				        {% endif %}
+				    </span>
+				</div>
+			{%endif%}
 		</div>		
 	</div>
 {%endblock%}
