@@ -19,6 +19,9 @@ class Queja(models.Model):
 	descripcion = models.CharField(max_length=1000)
 	usuario = models.ForeignKey(User,related_name='queja',on_delete=models.CASCADE)
 
+	class Meta:
+		ordering = ['-fechaCreacion']
+
 	def __unicode__(self):
 		return '%d: %s' % (self.pk, self.titulo)
 
