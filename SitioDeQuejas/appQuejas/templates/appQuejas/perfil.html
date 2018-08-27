@@ -5,57 +5,61 @@
 
 {% endblock %}
 {%block content%}
-	<h1>Perfil</h1>
-	<h2>Usuario: {{request.user}}</h2>
-	<table id="userData">
-		<tr>
-			<td><h2 class="etiqueta">Nombre:</h2></td>
-			<td><h2 class="respuesta">{{persona.nombrePersona}}</h2></td>
-		</tr>
-		<tr>
-			<td><h2 class="etiqueta">Apellido:</h2></td>
-			<td><h2 class="respuesta">{{persona.apellidoPersona}}</h2></td>
-		</tr>
-		<tr>
-			<td><h2 class="etiqueta">Profesion:</h2></td>
-			<td><h2 class="respuesta">{{persona.profesion}}</h2></td>
-		</tr>
-		<tr>
-			<td><h2 class="etiqueta">Número contacto:</h2></td>
-			<td><h2 class="respuesta">{{persona.numeroContacto}}</h2></td>
-		</tr>
-	</table>
-	<table id="quejas" class="table table-striped table-bordered" style="width:100%">
-		<thead>
+	{% if request.user.is_authenticated %}
+		<h1>Perfil</h1>
+		<h2>Usuario: {{request.user}}</h2>
+		<table id="userData">
 			<tr>
-				<th>Numero</th>
-				<th>Titulo</th>
-				<th>Categoria</th>
-				<th>Fecha</th>
+				<td><h2 class="etiqueta">Nombre:</h2></td>
+				<td><h2 class="respuesta">{{persona.nombrePersona}}</h2></td>
 			</tr>
-		</thead>
-		<tbody>
-			{% for queja in listaQuejas %}
+			<tr>
+				<td><h2 class="etiqueta">Apellido:</h2></td>
+				<td><h2 class="respuesta">{{persona.apellidoPersona}}</h2></td>
+			</tr>
+			<tr>
+				<td><h2 class="etiqueta">Profesion:</h2></td>
+				<td><h2 class="respuesta">{{persona.profesion}}</h2></td>
+			</tr>
+			<tr>
+				<td><h2 class="etiqueta">Número contacto:</h2></td>
+				<td><h2 class="respuesta">{{persona.numeroContacto}}</h2></td>
+			</tr>
+		</table>
+		<table id="quejas" class="table table-striped table-bordered" style="width:100%">
+			<thead>
 				<tr>
-					<td>{{forloop.counter}}</td>
-					<td>{{queja.titulo}}</td>
-					<td>{{queja.categoria.nombre}}</td>
-					<td>{{queja.fechaCreacion}}</td>
+					<th>Numero</th>
+					<th>Titulo</th>
+					<th>Categoria</th>
+					<th>Fecha</th>
 				</tr>
-			{%endfor%}
-		</tbody>
-		<tfoot>
-			<tr>
-				<th>Numero</th>
-				<th>Titulo</th>
-				<th>Categoria</th>
-				<th>Fecha</th>
-			</tr>
-		</tfoot>
-	</table>
-	<script src="{% static 'js/jquery-3.3.1.js' %}"></script>
-	<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-	<script src="{% static 'js/perfil.js' %}"></script>
+			</thead>
+			<tbody>
+				{% for queja in listaQuejas %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{queja.titulo}}</td>
+						<td>{{queja.categoria.nombre}}</td>
+						<td>{{queja.fechaCreacion}}</td>
+					</tr>
+				{%endfor%}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>Numero</th>
+					<th>Titulo</th>
+					<th>Categoria</th>
+					<th>Fecha</th>
+				</tr>
+			</tfoot>
+		</table>
+		<script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+		<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+		<script src="{% static 'js/perfil.js' %}"></script>
+	{% else %}
+		<h1>USTED NO ESTA LOGGEADO</h1>
+	{% endif %}
 {%endblock%}
 {% block scripts %}
 	<script src="{% static 'js/menu.js' %}"></script>

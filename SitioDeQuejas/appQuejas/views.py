@@ -143,12 +143,15 @@ class DetalleCategoria(APIView):
 			return Categoria.objects.get(pk=pk)
 		except Categoria.DoesNotExist:
 			raise Http404
+	
 	def get(self, request, pk, format=None):
 		categoria = self.get_object(pk)
 		serializer = CategoriaSerializer(categoria)
 		return Response(serializer.data)
 
 def perfil(request):
+	if not request.user.is_authenticated:
+		return render(request, 'appQuejas/perfil.html')
 	usuario = request.user.id
 	persona = Persona.objects.get(user=usuario)
 	listaQuejas = Queja.objects.filter(usuario_id=usuario).order_by('-fechaCreacion')
