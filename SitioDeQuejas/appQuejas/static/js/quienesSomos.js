@@ -1,18 +1,5 @@
 (function(){ 
 
-	/*$.ajax({
-		type: "GET",
-		url: "data/quienesSomos.xml",
-		dataType: "xml",
-		success: obtenerIntegrantes
-	});
-
-	$.ajax({
-		type: "GET",
-		url: "data/timeline.xml",
-		dataType: "xml",
-		success: cargarTimeline
-	});*/
 	$.ajax({
 		type: "GET",
 		url: "/ajax/categorias/",
@@ -51,16 +38,15 @@ function obtenerIntegrantes(data){
 		mainFl.append(frontside);
 		mainFl.append(backside);
 		nuevo.append(mainFl);
-		
 		//nuevo.append("<h3>"+nombres+"</h3>");
 		//nuevo.append("<h3>"+apellidos+"</h3>");
 		//nuevo.append("<img class='col-12' src='"+urlFoto+"' alt='Foto de "+nombres+apellidos+"'>");
 		//nuevo.append("<p><strong>Carrera: </strong>"+carrera+"</p>")
 		//nuevo.append("<p><strong>Bio: </strong><br>"+bio+"</p>")
 		nuevo.appendTo("#integrantes");	
->>>>>>> 1b54eea2a6231bfc47153cbe70825e2fbda1592b
+
 	});
-})();
+}
 
 function cargarEstadisticos(data){
 	console.log(data);

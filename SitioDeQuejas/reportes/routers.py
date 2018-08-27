@@ -9,7 +9,7 @@ class MyApp2Router(object):
         Point all operations on myapp2 models to 'my_db_2'
         """
         if model._meta.app_label == 'reportes':
-            return 'dbreportes'
+            return 'reportes'
         return None
  
     def db_for_write(self, model, **hints):
@@ -17,7 +17,7 @@ class MyApp2Router(object):
         Point all operations on myapp models to 'other'
         """
         if model._meta.app_label == 'reportes':
-            return 'dbreportes'
+            return 'reportes'
         return None
  
     def allow_relation(self, obj1, obj2, **hints):
@@ -35,5 +35,5 @@ class MyApp2Router(object):
         database.
         """
         if app_label == 'reportes':
-            return db == 'dbreportes'
+            return db == 'reportes'
         return None
