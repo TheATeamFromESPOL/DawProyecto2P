@@ -20,7 +20,8 @@ function agregar(){
     info.imagen="imagenRuta";
     info.descripcion=$("#explicacionQueja").val();
     /*Debe ir id user que este logeado*/
-    info.usuario=$(".userId").attr("id");
+    /*info.usuario=$(".userId").attr("id");*/
+    info.usuario=2;
     console.log(info)
     $.ajax({
         url: "/ajax/administarQuejas/",
