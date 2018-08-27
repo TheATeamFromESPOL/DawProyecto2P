@@ -1,8 +1,7 @@
 {% extends 'appQuejas/plantilla.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.min.css' %}">
 {% block css %}
-
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
 {% endblock %}
 {%block content%}
 	{% if request.user.is_authenticated %}
@@ -33,15 +32,17 @@
 					<th>Titulo</th>
 					<th>Categoria</th>
 					<th>Fecha</th>
+					<th>Accion</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for queja in listaQuejas %}
 					<tr>
-						<td>{{forloop.counter}}</td>
-						<td>{{queja.titulo}}</td>
+						<td id="{{queja.id}}" class="numQueja">{{forloop.counter}}</td>
+						<td><a href="{% url 'noticia' pk=queja.pk %}">{{queja.titulo}}</td>
 						<td>{{queja.categoria.nombre}}</td>
 						<td>{{queja.fechaCreacion}}</td>
+						<td><a href="{% url 'accionQueja' pk=queja.pk %}">Realizar Accion</a></td>
 					</tr>
 				{%endfor%}
 			</tbody>
@@ -51,6 +52,7 @@
 					<th>Titulo</th>
 					<th>Categoria</th>
 					<th>Fecha</th>
+					<th>Accion</th>
 				</tr>
 			</tfoot>
 		</table>

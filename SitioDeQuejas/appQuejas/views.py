@@ -9,9 +9,10 @@ from rest_framework import permissions
 from django.contrib.auth import authenticate,login,logout
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect 
-from .forms import ContactForm
+from .forms import *
 from .serializers import *
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from rest_framework.renderers import TemplateHTMLRenderer
 
 
 def cargarNoticias(request):
@@ -166,3 +167,31 @@ class Listarcategorias(APIView):
 		queryset=Categoria.objects.all()
 		serializer = CategoriaSerializer(queryset, many=True)
 		return Response(serializer.data)
+
+def quejaAccion(request,pk):
+	if request.method == "GET":
+		queja = get_object_or_404(Queja,pk=pk)
+		form = QuejaForm(instance = queja)
+		return render(request, 'appQuejas/editQueja.html',{"queja":queja,"form":form})
+	elif request.method == "POST":
+		queja = get_object_or_404(Queja,pk=pk)
+		form = QuejaForm(request.POST,instance=queja)
+		if form.has_changed():
+			print("cambio")
+			if form.is_valid():
+				print("es valido")
+				form.save()
+				usuario = request.user.id
+				persona = Persona.objects.get(user=usuario)
+				listaQuejas = Queja.objects.filter(usuario_id=usuario).order_by('-fechaCreacion')
+				return render(request, 'appQuejas/perfil.html',{"persona":persona,"listaQuejas":listaQuejas})
+	return redirect('perfil')
+
+def eliminarQueja(request,pk):
+	if request.method == "POST":
+		queja = get_object_or_404(Queja,pk=pk)
+		queja.delete()
+	usuario = request.user.id
+	persona = Persona.objects.get(user=usuario)
+	listaQuejas = Queja.objects.filter(usuario_id=usuario).order_by('-fechaCreacion')
+	return render(request, 'appQuejas/perfil.html',{"persona":persona,"listaQuejas":listaQuejas,"eliminacion":True})

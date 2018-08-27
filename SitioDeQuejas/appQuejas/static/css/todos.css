@@ -168,11 +168,20 @@ footer #logoFooter {
 	margin-right: 3%;
 	margin-left: 3%;
 	margin-bottom: 2%;
+	max-height: 100%;
+}
+
+.previaConImagen .contenidoQueja{
+	width: 100%;
+	height: 50%;
 }
 
 .previaConImagen .imagenQueja{
 	width: 100%;
+	height: 100px;
+	max-height: 50%;
 }
+
 /*
 .pieDeQueja .botonGuardar {
 	width: 2%;
@@ -195,10 +204,7 @@ footer #logoFooter {
 .fondo{
 	background-color: #262726;
 }
-.imgNoticia{
-	width: 100%;
-    height: auto;
-}
+
 .categoria{
 	
 	border-style: none;

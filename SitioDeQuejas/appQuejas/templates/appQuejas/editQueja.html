@@ -1,0 +1,19 @@
+{% extends 'appQuejas/plantilla.html' %}
+{% load staticfiles %}
+{% block css %}
+{% endblock %}
+{%block content%}
+	{% if request.user.is_authenticated %}
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit">Actualizar</button>
+			<button type="submit" formaction="{% url 'eliminarQueja' pk=queja.pk %}" formmethod="POST">Borrar</button>
+		</form>
+	{% else %}
+		<h1>USTED NO ESTA LOGGEADO</h1>
+	{% endif %}
+{%endblock%}
+{% block scripts %}
+	<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}
