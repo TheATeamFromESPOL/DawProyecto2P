@@ -151,7 +151,8 @@ class DetalleCategoria(APIView):
 def perfil(request):
 	usuario = request.user.id
 	persona = Persona.objects.get(user=usuario)
-	return render(request, 'appQuejas/perfil.html',{"persona":persona})
+	listaQuejas = Queja.objects.filter(usuario_id=usuario).order_by('-fechaCreacion')
+	return render(request, 'appQuejas/perfil.html',{"persona":persona,"listaQuejas":listaQuejas})
 
 def pagUsuario(request):
 	return
