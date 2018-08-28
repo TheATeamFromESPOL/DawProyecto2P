@@ -13,6 +13,18 @@ from .forms import ContactForm
 from .serializers import *
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
+from reportes.models import *
+from reportes.serializers import *
+
+def reportesCategorias(request):
+	listaCategorias = CategoriaReporte.objects.all()
+	categoria = Categoria.objects.all()
+	persona = Persona.objects.all()
+	print("aquiíiiiiii")
+	print(listaCategorias)
+	print(categoria)
+	print(persona)
+	return render(request,'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"categoria":categoria,"persona":persona})
 
 def cargarNoticias(request):
 	listaQuejas=Queja.objects.all()
@@ -29,16 +41,6 @@ def quienesSomos(request):
 	#Esto es lo mismo siempre
 	return render(request, 'appQuejas/quienesSomos.html',{})
 
-def categorias(request):
-	return redirect("/categorias/Barrios-Ciudadelas")
-	#listaCategorias = Categoria.objects.all()
-
-	#if tipo == "inicio":
-	#	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"mensaje": "Escoja una categoria para ver"})
-	#categoria = Categoria.objects.get(nombre=tipo)
-	#quejas = Queja.objects.get()
-	#return render(request, 'appQuejas/categorias.html',{"quejas":None,"listaCategorias":listaCategorias,"mensaje":"Seleccione una categoria"})
-
 def categoriaQuejas(request,tipo):
 	listaCategorias = Categoria.objects.all()
 	categoria = Categoria.objects.get(nombre=tipo)
@@ -47,7 +49,6 @@ def categoriaQuejas(request,tipo):
 	page = request.GET.get('page')
 	quejas = paginator.get_page(page)
 	return render(request, 'appQuejas/categorias.html',{"listaCategorias":listaCategorias,"quejas": quejas,"mensaje":""})
-
 
 def registro(request):
 	if request.method == 'POST':
@@ -101,8 +102,24 @@ def contactenos(request):
  
 	return render(request, 'appQuejas/contactenos.html', {'form': form})
 
-def thanks(request):
-	return HttpResponse('Success! Thank you for your message.')
+@permission_classes((permissions.AllowAny,))
+class ListarReportes(APIView):
+	def get(self, request, format=None):
+		queryset=CategoriaReporte.objects.all()
+		
+		serializer = ReporteSerializer(queryset, many=True)
+		return Response(serializer.data)
+
+	def post(self, request, format=None):
+		print("entra ListarReporte Post")
+		print(request.data)
+		
+		print(ReporteSerializer(data=request.data))
+		serializer = ReporteSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @permission_classes((permissions.AllowAny,))
 class ListarQuejas(APIView):

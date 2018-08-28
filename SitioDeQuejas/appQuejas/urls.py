@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     path(r'', views.cargarNoticias,name='index'),
     path(r'quienesSomos/',views.quienesSomos,name='quienesSomos'),
-    path(r'categorias/',views.categorias,name='categorias'),
+    path(r'categorias/',views.reportesCategorias,name='categorias'),
+    #path(r'categorias/',views.categorias,name='categorias'),
     path(r'categorias/<tipo>',views.categoriaQuejas,name='categoriaQuejas'),
     path(r'registro/',views.registro,name='registro'),
     path(r'iniciarSesion/',views.iniciarSesion,name='iniciarSesion'),
@@ -18,5 +19,6 @@ urlpatterns = [
     url(r'^ajax/cargarNoticia/$', views.DetalleQuejas.as_view(), name='cargarNoticia'),
     url(r'^ajax/categorias/$', views.Listarcategorias.as_view()),
     url(r'^ajax/CategoriaDetalle/(?P<pk>[0-9]+)/$', views.DetalleCategoria.as_view()),
+    url(r'^ajax/CategoriaReporte/',views.ListarReportes.as_view(),name='reporteCategorias'),
 
 ]

@@ -15,6 +15,7 @@ function agregar(){
 	console.log("entra boton enviar");
     var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
     info ={}
+    inforepo ={}
     info.titulo=$("#inputTitulo").val(),
     info.categoria=$("#selectCategoria").val(),
     info.imagen="imagenRuta";
@@ -22,7 +23,10 @@ function agregar(){
     /*Debe ir id user que este logeado*/
     /*info.usuario=$(".userId").attr("id");*/
     info.usuario=2;
+    inforepo.nombreCategoria=$("#selectCategoria").val(),
+    inforepo.usuarioId=2;
     console.log(info)
+    console.log(inforepo)
     $.ajax({
         url: "/ajax/administarQuejas/",
         type:"POST",    
@@ -36,6 +40,22 @@ function agregar(){
         },
         error : function(xhr, status) {
         	console.log("error");
+            alert(xhr['responseJSON']);
+        },
+    });
+    $.ajax({
+        url: "ajax/CategoriaReporte/",
+        type:"POST",    
+        dataType : 'json',
+        headers:{"X-CSRFToken": crf_token},
+        data:inforepo,
+        success :function(respuesta) {
+            console.log("exito enviar");
+            alert("queja cargada con éxito");
+            cerrarNuevaQueja();
+        },
+        error : function(xhr, status) {
+            console.log("error");
             alert(xhr['responseJSON']);
         },
     });
@@ -64,5 +84,4 @@ function cargarCategorias(data){
     	opcionCategoria = '<option value='+categoria.id+'>' + categoria.nombre + '</option>';
     	$('#selectCategoria').append(opcionCategoria);
     }
-    
 }

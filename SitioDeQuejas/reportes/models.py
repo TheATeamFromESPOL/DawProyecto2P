@@ -1,5 +1,7 @@
 from djongo import models
 from django import forms
 
-class Categoria(models.Model):
-	nombre = models.CharField(max_length=90)
+class CategoriaReporte(models.Model):
+	nombreCategoria = models.IntegerField()
+	usuarioId = models.IntegerField()
+	

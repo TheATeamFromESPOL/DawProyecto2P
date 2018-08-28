@@ -56,8 +56,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'SitioDeQuejas.urls'
 
-DATABASE_ROUTERS = ['reportes.routers.MyApp2Router',]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -91,9 +89,11 @@ DATABASES = {
     },
     'reportes': {
         'ENGINE': 'djongo',
-        'NAME': 'dbreportes',
+        'NAME': 'reportes',
     }
 }
+
+DATABASE_ROUTERS = ['reportes.routers.MyApp2Router',]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
