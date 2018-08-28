@@ -15,13 +15,16 @@ function agregar(){
 	console.log("entra boton enviar");
     var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
     info ={}
+<<<<<<< HEAD
     inforepo ={}
+=======
+    info.id;
+>>>>>>> 6e68dd65de551a109e324f7a7cc2b5fef5db2bd3
     info.titulo=$("#inputTitulo").val(),
-    info.categoria=$("#selectCategoria").val(),
+    info.categoria=Number($("#selectCategoria").val()),
     info.imagen="imagenRuta";
     info.descripcion=$("#explicacionQueja").val();
-    /*Debe ir id user que este logeado*/
-    /*info.usuario=$(".userId").attr("id");*/
+    info.usuario=$(".userId").attr("id");
     info.usuario=2;
     inforepo.nombreCategoria=$("#selectCategoria").val(),
     inforepo.usuarioId=2;

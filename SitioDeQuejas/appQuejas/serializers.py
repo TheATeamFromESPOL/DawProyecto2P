@@ -19,9 +19,10 @@ class PersonaSerializer(serializers.ModelSerializer):
 
 	
 class QuejaSerializer(serializers.ModelSerializer):
+    usuario = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Queja
-        fields = ( 'titulo', 'categoria', 'fechaCreacion', 'imagen', 'descripcion','usuario')
+        fields = ('id','titulo', 'categoria', 'fechaCreacion', 'imagen', 'descripcion','usuario')
 
 		
 class ComentarioSerializer(serializers.ModelSerializer):

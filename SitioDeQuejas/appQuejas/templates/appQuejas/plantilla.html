@@ -28,10 +28,11 @@
 					</div>
 				</div>
 				<div class="d-flex">
-					<div class="p-2">
-						<button id="botonNuevaQueja" class="btn btn-primary bg-primary" type="submit">Nueva Queja</button>
-					</div>
+					
 					{% if request.user.is_authenticated %}
+						<div class="p-2">
+							<button id="botonNuevaQueja" class="btn btn-primary bg-primary" type="submit">Nueva Queja</button>
+						</div>
 						<div class="p-2 align-self-center">
 							<a href="{% url 'perfil' %}"><span class="icon-users"></span>{{request.user.username}}</a> │ <a href="{% url 'salirSesion' %}">Cerrar Sesión</a>
 						</div>

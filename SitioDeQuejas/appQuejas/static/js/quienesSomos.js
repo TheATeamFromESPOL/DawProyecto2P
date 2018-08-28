@@ -4,11 +4,19 @@
 		type: "GET",
 		url: "/ajax/categorias/",
 		dataType: "json",
-		success: cargarEstadisticos
+		success: cargarEstadisticos,
+
+	});
+
+	$.ajax({
+		type: "GET",
+		url: "/ajax/administarQuejas/",
+		dataType: "json",
+		success: cargarEstadisticos2,
 
 	});
 })();
-
+/*
 function obtenerIntegrantes(data){
 	$(data).find('integrante').each(function(){
 		var nombres = $(this).find('nombres').text();
@@ -46,7 +54,7 @@ function obtenerIntegrantes(data){
 		nuevo.appendTo("#integrantes");	
 
 	});
-}
+}*/
 
 function cargarEstadisticos(data){
 	console.log(data);
@@ -96,4 +104,37 @@ function hexToRgbA(hex){
         return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
     }
     throw new Error('Bad Hex');
+}
+
+function cargarEstadisticos2(data){
+	console.log(data);
+	var datos2={labels:[],datasets:[{label:"Estadistico por numero de quejas",data:[],backgroundColor: [],borderColor:[]}]
+	}
+	var meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+	for (i in meses){
+		datos2["labels"]=meses;
+		datos2["datasets"][0]["data"]=[0,0,0,0,0,0,0,0,0,0,0,0]
+		datos2["datasets"][0]["backgroundColor"].push(getRandomColor());
+		datos2["datasets"][0]["borderColor"].push("#262726");
+	}
+	for(var queja of data) {
+		var mes=(queja.fechaCreacion).split("-")[1];
+		datos2["datasets"][0]["data"][Number(mes)-1]+=1;
+	}
+	
+	var ctx = $("#myChart2");
+	var myPieChart = new Chart(ctx, {
+		type: 'pie',
+		data: datos2,
+		options:{
+			legend: {
+				labels: {
+					// This more specific font property overrides the global property
+					fontColor: 'white',
+					fontSize:15,
+				}
+			}
+		}
+	});
+
 }
