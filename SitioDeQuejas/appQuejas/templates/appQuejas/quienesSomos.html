@@ -48,7 +48,15 @@
 			</canvas>
 		</div>
 	</div>
-
+	<div class="jumbotron titulo">
+		<h3>Estadísticas de quejas por mes</h3>
+	</div>
+	<div class="d-flex flex-wrap justify-content-center">
+		<div id="statisticsw" class="col-md-4 p-2 m-5">
+			<canvas id="myChart2" width="400" height="400">		
+			</canvas>
+		</div>
+	</div>
 {%endblock%}
 {% block scripts %}
 	<script src="{% static 'js/d3.v3.min.js' %}"></script>

@@ -15,8 +15,9 @@ function agregar(){
 	console.log("entra boton enviar");
     var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
     info ={}
+    info.id;
     info.titulo=$("#inputTitulo").val(),
-    info.categoria=$("#selectCategoria").val(),
+    info.categoria=Number($("#selectCategoria").val()),
     info.imagen="imagenRuta";
     info.descripcion=$("#explicacionQueja").val();
     /*Debe ir id user que este logeado*/

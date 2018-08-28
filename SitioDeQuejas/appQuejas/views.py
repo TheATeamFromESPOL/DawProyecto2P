@@ -109,15 +109,11 @@ def thanks(request):
 class ListarQuejas(APIView):
 	def get(self, request, format=None):
 		queryset=Queja.objects.all()
-		queryset=queryset[:6]
 		serializer = QuejaSerializer(queryset, many=True)
 		return Response(serializer.data)
 
 	def post(self, request, format=None):
-		print("entra")
-		print(request.data)
-		
-		print(QuejaSerializer(data=request.data))
+		print("entra")		
 		serializer = QuejaSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
@@ -195,3 +191,4 @@ def eliminarQueja(request,pk):
 	persona = Persona.objects.get(user=usuario)
 	listaQuejas = Queja.objects.filter(usuario_id=usuario).order_by('-fechaCreacion')
 	return render(request, 'appQuejas/perfil.html',{"persona":persona,"listaQuejas":listaQuejas,"eliminacion":True})
+
