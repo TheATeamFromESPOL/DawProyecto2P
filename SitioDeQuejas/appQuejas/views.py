@@ -113,7 +113,7 @@ class ListarQuejas(APIView):
 		return Response(serializer.data)
 
 	def post(self, request, format=None):
-		print("entra")		
+		print(request.data)		
 		serializer = QuejaSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
